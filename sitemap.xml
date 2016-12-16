@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://baiyangliu.com/404.html</loc>
+    
+    <lastmod>2016-12-16T10:09:05.123Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://baiyangliu.com/2016/12/15/CentOS7-Strongswan-IKEV2-Let-s-Encrypt/</loc>
     
     <lastmod>2016-12-15T11:55:08.559Z</lastmod>
