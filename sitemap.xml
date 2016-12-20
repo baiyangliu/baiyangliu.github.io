@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://baiyangliu.com/hello.html</loc>
+    
+    <lastmod>2016-12-20T06:55:44.714Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://baiyangliu.com/test_speed.js</loc>
     
     <lastmod>2016-12-20T02:01:36.282Z</lastmod>
@@ -51,7 +58,7 @@
   </url>
   
   <url>
-    <loc>https://baiyangliu.com/%E8%AE%A9C-WebBrowser%E4%BD%BF%E7%94%A8IE11.html</loc>
+    <loc>https://baiyangliu.com/%E8%AE%A9C#-WebBrowser%E4%BD%BF%E7%94%A8IE11.html</loc>
     
     <lastmod>2016-12-15T11:54:13.324Z</lastmod>
     
@@ -110,13 +117,6 @@
     <loc>https://baiyangliu.com/tags.html</loc>
     
     <lastmod>2016-12-15T10:33:51.584Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://baiyangliu.com/hello.html</loc>
-    
-    <lastmod>2016-12-15T07:27:21.370Z</lastmod>
     
   </url>
   

@@ -212,8 +212,8 @@
   
   <entry>
     <title>让C# WebBrowser使用IE11</title>
-    <link href="https://baiyangliu.com/%E8%AE%A9C-WebBrowser%E4%BD%BF%E7%94%A8IE11.html"/>
-    <id>https://baiyangliu.com/让C-WebBrowser使用IE11.html</id>
+    <link href="https://baiyangliu.com/%E8%AE%A9C#-WebBrowser%E4%BD%BF%E7%94%A8IE11.html"/>
+    <id>https://baiyangliu.com/让C#-WebBrowser使用IE11.html</id>
     <published>2016-12-15T07:31:25.000Z</published>
     <updated>2016-12-15T11:54:13.324Z</updated>
     
@@ -239,15 +239,14 @@
     <link href="https://baiyangliu.com/hello.html"/>
     <id>https://baiyangliu.com/hello.html</id>
     <published>2016-12-15T04:59:00.000Z</published>
-    <updated>2016-12-15T07:27:21.370Z</updated>
+    <updated>2016-12-20T06:55:44.714Z</updated>
     
     <content type="html"><![CDATA[<p>折腾过Wordpress，折腾过Discuzz，折腾过Ghost，折腾过国内的各个博客……折腾来折腾去，以前写的好些东西都被折腾没了。不想再折腾了，以后就Hexo了。</p>
 ]]></content>
     
     <summary type="html">
     
-      &lt;p&gt;折腾过Wordpress，折腾过Discuzz，折腾过Ghost，折腾过国内的各个博客……折腾来折腾去，以前写的好些东西都被折腾没了。不想再折腾了，以后就Hexo了。&lt;/p&gt;
-
+      小小白杨，博客搬家。
     
     </summary>
     
