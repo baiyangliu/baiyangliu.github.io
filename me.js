@@ -1,1 +1,1 @@
-{"qq":407453324,"wechat":"baiyangliu","email":"lc@baiyangliu.com"}
+var me={qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"};
