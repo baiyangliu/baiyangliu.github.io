@@ -1,1 +1,1 @@
-{qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"}
+{"qq":407453324,"wechat":"baiyangliu","email":"lc@baiyangliu.com"}
