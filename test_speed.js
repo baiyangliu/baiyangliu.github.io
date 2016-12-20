@@ -1,1 +1,34 @@
-(function(){var a=false;window.onload=function(){var r=$("head");var n=$(".links-of-blogroll-list li a");var o=0;var l=[];for(var o=0;o<n.length;o++){$(n[o]).parent().attr("id","li_id_"+o);(function(r,n){var o="$.ajax({url:r+"/me.js",jsonpCallback:"callback",dataType:"jsonp",success:function(r){console.log(n);if(a){return}a=true;var">【响应最快】");o.css({color:"green","font-weight":"bold"});for(var t in l){l[t].abort()}},error:function(){}});l.push(o)})($(n[o]).attr("href"),"li_id_"+o)}}})();</n.length;o++){$(n[o]).parent().attr("id","li_id_"+o);(function(r,n){var>
+var speedTestDone = false;
+window.onload = function() {
+    var head = $('head');
+    var list = $(".links-of-blogroll-list li a");
+    var i = 0;
+    var requests = [];
+    list.each(function() {
+        $(this).parent().attr("id", "li_id_" + i); (function(href, i) {
+            var r = $.ajax({
+                url: href + "/me" + i + ".js",
+                jsonpCallback: "callback" + i,
+                dataType: "jsonp",
+                success: function(response) {
+                    if (speedTestDone) {
+                        return;
+                    }
+                    speedTestDone = true;
+                    var li = $("#li_id_" + i);
+                    li.html(li.html() + "<span>【响应最快】</span>");
+                    li.css({
+                        "color": "green",
+                        "font-weight": "bold"
+                    });
+                    for (var j in requests) {
+                        requests[j].abort();
+                    }
+                },
+                error: function() {}
+            });
+            requests.push(r);
+        })($(this).attr("href"), i);
+        i++;
+    });
+};
