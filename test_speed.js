@@ -1,1 +1,33 @@
-var speedTestDone=!1;window.onload=function(){var n=($("head"),$(".links-of-blogroll-list li a")),a=0,o=[];n.each(function(){$(this).parent().attr("id","li_id_"+a),function(n,a){var e=$.ajax({url:n+"/me"+a+".js",jsonpCallback:window["callback"+a]=function(){},dataType:"jsonp",success:function(n){if(!speedTestDone){speedTestDone=!0;var e=$("#li_id_"+a);e.html(e.html()+"<span>【响应最快】</span>"),e.css({color:"green","font-weight":"bold"});for(var l in o)window["callback"+l]=null,delete window["callback"+l],o[l].abort()}},error:function(){}});o.push(e)}($(this).attr("href"),a),a++})};
+var speedTestDone = false;
+window.onload = function() {
+    var head = $('head');
+    var list = $(".links-of-blogroll-list li a");
+    var i = 0;
+    var requests = [];
+    list.each(function() {
+        $(this).parent().attr("id", "li_id_" + i); (function(href, i) {
+            var r = $.ajax({
+                url: href + "/me.js",
+                dataType: "jsonp",
+                success: function(response) {
+                    if (speedTestDone) {
+                        return;
+                    }
+                    speedTestDone = true;
+                    var li = $("#li_id_" + i);
+                    li.html(li.html() + "<span>【响应最快】</span>");
+                    li.css({
+                        "color": "green",
+                        "font-weight": "bold"
+                    });
+                    for (var j in requests) {
+                        requests[j].abort();
+                    }
+                },
+                error: function() {}
+            });
+            requests.push(r);
+        })($(this).attr("href"), i);
+        i++;
+    });
+};
