@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://baiyangliu.com/"/>
-  <updated>2016-12-15T11:51:20.944Z</updated>
+  <updated>2016-12-22T10:11:53.187Z</updated>
   <id>https://baiyangliu.com/</id>
   
   <author>
@@ -16,11 +16,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>You can&#39;t specify target table &#39;department_user&#39; for update in FROM clause</title>
+    <link href="https://baiyangliu.com/You-can-t-specify-target-table-xxx-for-update-in-FROM-clause.html"/>
+    <id>https://baiyangliu.com/You-can-t-specify-target-table-xxx-for-update-in-FROM-clause.html</id>
+    <published>2016-12-22T09:51:00.000Z</published>
+    <updated>2016-12-22T10:11:53.187Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="错误描述"><a href="#错误描述" class="headerlink" title="错误描述"></a>错误描述</h6><p>You can’t specify target table ‘department_user’ for update in FROM clause<br><a id="more"></a></p>
+<h6 id="出现原因"><a href="#出现原因" class="headerlink" title="出现原因"></a>出现原因</h6><p>MySQL中对同一张表Select的结果进行更新（删除）操作</p>
+<h6 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h6><p>删除部门，要求将部门用户移动到父部门</p>
+<h6 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h6><p>由于用户可能同时存在于本部门和父部门，因此在进行更新之前，需要将此类用户查出来直接删掉，然后更新部门ID。</p>
+<h6 id="出错SQL"><a href="#出错SQL" class="headerlink" title="出错SQL"></a>出错SQL</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span></div><div class="line"><span class="keyword">FROM</span></div><div class="line">	department_user</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	department_id = ?</div><div class="line"><span class="keyword">AND</span> user_id <span class="keyword">IN</span> (</div><div class="line">	<span class="keyword">SELECT</span></div><div class="line">		user_id</div><div class="line">	<span class="keyword">FROM</span></div><div class="line">		department_user</div><div class="line">	<span class="keyword">WHERE</span></div><div class="line">		department_id = ?</div><div class="line">	<span class="keyword">AND</span> user_id <span class="keyword">IN</span> (</div><div class="line">		<span class="keyword">SELECT</span></div><div class="line">			user_id</div><div class="line">		<span class="keyword">FROM</span></div><div class="line">			department_user</div><div class="line">		<span class="keyword">WHERE</span></div><div class="line">			department_id = ?</div><div class="line">	)</div><div class="line">)</div></pre></td></tr></table></figure>
+<h6 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h6><p>将Select的中间结果再次Select。。。</p>
+<h6 id="正确SQL"><a href="#正确SQL" class="headerlink" title="正确SQL"></a>正确SQL</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DELETE</span></div><div class="line"><span class="keyword">FROM</span></div><div class="line">	department_user</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">	department_id = ?</div><div class="line"><span class="keyword">AND</span> user_id <span class="keyword">IN</span> (</div><div class="line">	<span class="keyword">SELECT</span></div><div class="line">		t.user_id</div><div class="line">	<span class="keyword">FROM</span></div><div class="line">		(</div><div class="line">			<span class="keyword">SELECT</span></div><div class="line">				user_id</div><div class="line">			<span class="keyword">FROM</span></div><div class="line">				department_user</div><div class="line">			<span class="keyword">WHERE</span></div><div class="line">				department_id = ?</div><div class="line">			<span class="keyword">AND</span> user_id <span class="keyword">IN</span> (</div><div class="line">				<span class="keyword">SELECT</span></div><div class="line">					user_id</div><div class="line">				<span class="keyword">FROM</span></div><div class="line">					department_user</div><div class="line">				<span class="keyword">WHERE</span></div><div class="line">					department_id = ?</div><div class="line">			)</div><div class="line">		) t</div><div class="line">)</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      You can&#39;t specify target table &#39;department_user&#39; for update in FROM clause
+    
+    </summary>
+    
+      <category term="编码" scheme="https://baiyangliu.com/categories/%E7%BC%96%E7%A0%81/"/>
+    
+    
+      <category term="MySQL" scheme="https://baiyangliu.com/tags/MySQL/"/>
+    
+  </entry>
+  
+  <entry>
     <title>JSON压缩方案</title>
     <link href="https://baiyangliu.com/JSON%E5%8E%8B%E7%BC%A9%E6%96%B9%E6%A1%88.html"/>
     <id>https://baiyangliu.com/JSON压缩方案.html</id>
-    <published>2016-12-15T07:38:41.000Z</published>
-    <updated>2016-12-15T11:51:20.944Z</updated>
+    <published>2015-12-15T07:38:41.000Z</published>
+    <updated>2016-12-22T01:36:39.475Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/imgs/json.png" alt="JSON"><br><a id="more"></a><br>关于JSON，大家耳熟能详，不做多说，今天在这里分享一下关于JSON压缩的几点方案。</p>
 <h5 id="1-压缩Key"><a href="#1-压缩Key" class="headerlink" title="1.压缩Key"></a>1.压缩Key</h5><p>原始JSON（长度：79）<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="string">"username"</span>: <span class="string">"张三"</span>,</div><div class="line">	<span class="string">"gender"</span>: <span class="string">"M"</span>,</div><div class="line">	<span class="string">"age"</span>: <span class="number">38</span>,</div><div class="line">	<span class="string">"email"</span>: <span class="string">"a@b.com"</span>,</div><div class="line">	<span class="string">"phone"</span>: <span class="string">"15818376578"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
@@ -51,8 +79,8 @@
     <title>CentOS7 Strongswan IKEV2 Let&#39;s Encrypt</title>
     <link href="https://baiyangliu.com/CentOS7-Strongswan-IKEV2-Let-s-Encrypt.html"/>
     <id>https://baiyangliu.com/CentOS7-Strongswan-IKEV2-Let-s-Encrypt.html</id>
-    <published>2016-12-15T07:37:08.000Z</published>
-    <updated>2016-12-15T11:55:08.559Z</updated>
+    <published>2015-12-15T07:37:08.000Z</published>
+    <updated>2016-12-22T01:37:00.790Z</updated>
     
     <content type="html"><![CDATA[<p>前面介绍了如入用自签名证书，请参见<a href="http://0xa.in/aaaaa9" target="_blank" rel="external">CentOS7 Strongswan IKEV2 架设梯子</a>，这里介绍如何利用Let’s Encrypt签发证书省去导入的麻烦。<br><a id="more"></a><br>关于证书签发，请参见<a href="https://github.com/Neilpang/acme.sh" target="_blank" rel="external">acme.sh</a>，由于本站的域名已转移至<a href="https://godaddy.com/" target="_blank" rel="external">Godaddy</a>，利用acme.sh可以实现全自动证书签发。</p>
 <p>签发完后，证书位于<code>/root/.acme.sh/0xa.in</code>目录下（请查看本站证书详情）。<br>接下来，执行以下命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/strongswan/ipsec.d/certs</div><div class="line">ln <span class="_">-s</span> /root/.acme.sh/0xa.in/fullchain.cer fullchain.cer</div><div class="line"><span class="built_in">cd</span> /etc/strongswan/ipsec.d/private</div><div class="line">ln <span class="_">-s</span> /root/.acme.sh/0xa.in/0xa.in.key 0xa.in.key</div><div class="line"><span class="built_in">cd</span> /etc/strongswan/ipsec.d/cacerts</div><div class="line">ln <span class="_">-s</span> /root/.acme.sh/0xa.in/ca.cer ca.cer</div></pre></td></tr></table></figure></p>
@@ -81,8 +109,8 @@
     <title>Nginx HPKP Config</title>
     <link href="https://baiyangliu.com/Nginx-HPKP-Config.html"/>
     <id>https://baiyangliu.com/Nginx-HPKP-Config.html</id>
-    <published>2016-12-15T07:36:28.000Z</published>
-    <updated>2016-12-15T11:52:25.442Z</updated>
+    <published>2015-12-15T07:36:28.000Z</published>
+    <updated>2016-12-22T02:18:53.204Z</updated>
     
     <content type="html"><![CDATA[<p>以本站为例，采用的是Let’s Encrypt免费证书<code>Let&#39;s Encrypt Authority X3</code>，序列号为<code>‎0a 01 41 42 00 00 01 53 85 73 6a 0b 85 ec a7 08</code>，以下是ca.cer<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">-----BEGIN CERTIFICATE-----</div><div class="line">MIIEkjCCA3qgAwIBAgIQCgFBQgAAAVOFc2oLheynCDANBgkqhkiG9w0BAQsFADA/</div><div class="line">MSQwIgYDVQQKExtEaWdpdGFsIFNpZ25hdHVyZSBUcnVzdCBDby4xFzAVBgNVBAMT</div><div class="line">DkRTVCBSb290IENBIFgzMB4XDTE2MDMxNzE2NDA0NloXDTIxMDMxNzE2NDA0Nlow</div><div class="line">SjELMAkGA1UEBhMCVVMxFjAUBgNVBAoTDUxldCdzIEVuY3J5cHQxIzAhBgNVBAMT</div><div class="line">GkxldCdzIEVuY3J5cHQgQXV0aG9yaXR5IFgzMIIBIjANBgkqhkiG9w0BAQEFAAOC</div><div class="line">AQ8AMIIBCgKCAQEAnNMM8FrlLke3cl03g7NoYzDq1zUmGSXhvb418XCSL7e4S0EF</div><div class="line">q6meNQhY7LEqxGiHC6PjdeTm86dicbp5gWAf15Gan/PQeGdxyGkOlZHP/uaZ6WA8</div><div class="line">SMx+yk13EiSdRxta67nsHjcAHJyse6cF6s5K671B5TaYucv9bTyWaN8jKkKQDIZ0</div><div class="line">Z8h/pZq4UmEUEz9l6YKHy9v6Dlb2honzhT+Xhq+w3Brvaw2VFn3EK6BlspkENnWA</div><div class="line">a6xK8xuQSXgvopZPKiAlKQTGdMDQMc2PMTiVFrqoM7hD8bEfwzB/onkxEz0tNvjj</div><div class="line">/PIzark5McWvxI0NHWQWM6r6hCm21AvA2H3DkwIDAQABo4IBfTCCAXkwEgYDVR0T</div><div class="line">AQH/BAgwBgEB/wIBADAOBgNVHQ8BAf8EBAMCAYYwfwYIKwYBBQUHAQEEczBxMDIG</div><div class="line">CCsGAQUFBzABhiZodHRwOi8vaXNyZy50cnVzdGlkLm9jc3AuaWRlbnRydXN0LmNv</div><div class="line">bTA7BggrBgEFBQcwAoYvaHR0cDovL2FwcHMuaWRlbnRydXN0LmNvbS9yb290cy9k</div><div class="line">c3Ryb290Y2F4My5wN2MwHwYDVR0jBBgwFoAUxKexpHsscfrb4UuQdf/EFWCFiRAw</div><div class="line">VAYDVR0gBE0wSzAIBgZngQwBAgEwPwYLKwYBBAGC3xMBAQEwMDAuBggrBgEFBQcC</div><div class="line">ARYiaHR0cDovL2Nwcy5yb290LXgxLmxldHNlbmNyeXB0Lm9yZzA8BgNVHR8ENTAz</div><div class="line">MDGgL6AthitodHRwOi8vY3JsLmlkZW50cnVzdC5jb20vRFNUUk9PVENBWDNDUkwu</div><div class="line">Y3JsMB0GA1UdDgQWBBSoSmpjBH3duubRObemRWXv86jsoTANBgkqhkiG9w0BAQsF</div><div class="line">AAOCAQEA3TPXEfNjWDjdGBX7CVW+dla5cEilaUcne8IkCJLxWh9KEik3JHRRHGJo</div><div class="line">uM2VcGfl96S8TihRzZvoroed6ti6WqEBmtzw3Wodatg+VyOeph4EYpr/1wXKtx8/</div><div class="line">wApIvJSwtmVi4MFU5aMqrSDE6ea73Mj2tcMyo5jMd6jmeWUHK8so/joWUoHOUgwu</div><div class="line">X4Po1QYz+3dszkDqMp4fklxBwXRsW10KXzPMTZ+sOPAveyxindmjkW8lGy+QsRlG</div><div class="line">PfZ+G6Z6h7mjem0Y+iWlkYcV4PIWL1iwBi8saCbGS5jN2p8M+X+Q7UNKEkROb3N6</div><div class="line">KOqkqm57TH2H3eDJAkSnh6/DNFu0Qg==</div><div class="line">-----END CERTIFICATE-----</div></pre></td></tr></table></figure></p>
 <p>生成SPKI指纹<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">openssl x509 -noout -in ca.cer -pubkey | openssl asn1parse -noout -inform pem -out public.key;</div><div class="line">openssl dgst -sha256 -binary public.key | openssl enc -base64</div></pre></td></tr></table></figure></p>
@@ -112,8 +140,8 @@
     <title>刘氏家族</title>
     <link href="https://baiyangliu.com/%E5%88%98%E6%B0%8F%E5%AE%B6%E6%97%8F.html"/>
     <id>https://baiyangliu.com/刘氏家族.html</id>
-    <published>2016-12-15T07:34:27.000Z</published>
-    <updated>2016-12-15T11:30:26.611Z</updated>
+    <published>2015-12-15T07:34:27.000Z</published>
+    <updated>2016-12-22T01:36:13.716Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <h5 id="文刘金存先-汉朝宏正廷-学遵国法传-家宗义方兴"><a href="#文刘金存先-汉朝宏正廷-学遵国法传-家宗义方兴" class="headerlink" title="文刘金存先  汉朝宏正廷  学遵国法传  家宗义方兴"></a>文刘金存先  汉朝宏正廷  学遵国法传  家宗义方兴</h5><h5 id="德泽本延长-绒和道大光-敦行秉良善-积后自荣昌"><a href="#德泽本延长-绒和道大光-敦行秉良善-积后自荣昌" class="headerlink" title="德泽本延长  绒和道大光  敦行秉良善  积后自荣昌"></a>德泽本延长  绒和道大光  敦行秉良善  积后自荣昌</h5><h5 id="承宪须修治-饮崇亦裕世-隆培栽福基-进广安怀志"><a href="#承宪须修治-饮崇亦裕世-隆培栽福基-进广安怀志" class="headerlink" title="承宪须修治  饮崇亦裕世  隆培栽福基  进广安怀志"></a>承宪须修治  饮崇亦裕世  隆培栽福基  进广安怀志</h5><h5 id="纪钦喜成献-高明著述全-嘉猷常建恕-显达保辉联"><a href="#纪钦喜成献-高明著述全-嘉猷常建恕-显达保辉联" class="headerlink" title="纪钦喜成献  高明著述全  嘉猷常建恕  显达保辉联"></a>纪钦喜成献  高明著述全  嘉猷常建恕  显达保辉联</h5><h5 id="富有恒欲俊-端宣昭敏慎-履循贵用中-发祥永锡庆"><a href="#富有恒欲俊-端宣昭敏慎-履循贵用中-发祥永锡庆" class="headerlink" title="富有恒欲俊  端宣昭敏慎  履循贵用中  发祥永锡庆"></a>富有恒欲俊  端宣昭敏慎  履循贵用中  发祥永锡庆</h5>]]></content>
@@ -132,8 +160,8 @@
     <title>CentOS7 Strongswan IKEV2 架设梯子</title>
     <link href="https://baiyangliu.com/CentOS7-Strongswan-IKEV2-%E6%9E%B6%E8%AE%BE%E6%A2%AF%E5%AD%90.html"/>
     <id>https://baiyangliu.com/CentOS7-Strongswan-IKEV2-架设梯子.html</id>
-    <published>2016-12-15T07:34:00.000Z</published>
-    <updated>2016-12-15T11:54:58.184Z</updated>
+    <published>2015-12-15T07:34:00.000Z</published>
+    <updated>2016-12-22T01:36:53.167Z</updated>
     
     <content type="html"><![CDATA[<p><img src="/imgs/firewall.jpg" alt="长城防火墙"><br><a id="more"></a><br>参考：<br>1.<a href="https://linsir.org/post/how_to_install_IPSec_IKEV2_base_on_strongswan_with_CentOS7" target="_blank" rel="external">https://linsir.org/post/how_to_install_IPSec_IKEV2_base_on_strongswan_with_CentOS7</a><br>2.<a href="https://raymii.org/s/tutorials/IPSEC_vpn_with_CentOS_7.html" target="_blank" rel="external">https://raymii.org/s/tutorials/IPSEC_vpn_with_CentOS_7.html</a></p>
 <h6 id="strongswan-sh"><a href="#strongswan-sh" class="headerlink" title="strongswan.sh"></a>strongswan.sh</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/sh</span></div><div class="line"><span class="comment">#strongswan.sh</span></div><div class="line"></div><div class="line">yum install strongswan -y</div><div class="line"></div><div class="line">yum install haveged -y</div><div class="line">systemctl <span class="built_in">enable</span> haveged</div><div class="line">systemctl start haveged</div><div class="line"></div><div class="line"></div><div class="line"><span class="built_in">cd</span> /etc/strongswan</div><div class="line">strongswan pki --gen --type rsa --size 4096 --outform der &gt; ipsec.d/private/ca.key.der</div><div class="line">chmod 600 ipsec.d/private/ca.key.der</div><div class="line"></div><div class="line"></div><div class="line">strongswan pki --self --ca --lifetime 7300 --in ipsec.d/private/ca.key.der --type rsa --dn <span class="string">"C=CN, O=VPN, CN=StrongSwan Root CA"</span> --outform der &gt; ipsec.d/cacerts/ca.crt.der</div><div class="line"></div><div class="line"></div><div class="line">strongswan pki --print --in ipsec.d/cacerts/ca.crt.der</div><div class="line">strongswan pki --gen --type rsa --size 4096 --outform der &gt; ipsec.d/private/vpn.key.der</div><div class="line">openssl x509 -inform DER -in ipsec.d/cacerts/ca.crt.der -out ipsec.d/cacerts/ca.crt.pem -outform PEM</div><div class="line">chmod 600 ipsec.d/private/vpn.key.der</div><div class="line"></div><div class="line"></div><div class="line">strongswan pki --pub --in ipsec.d/private/vpn.key.der --type rsa | strongswan pki --issue --lifetime 7300 --cacert ipsec.d/cacerts/ca.crt.der --cakey ipsec.d/private/ca.key.der --dn <span class="string">"C=CN, O=VPN, CN=vpn.0xa.in"</span> --san vpn.0xa.in --san 163.44.166.55  --san @163.44.166.55 --flag serverAuth --flag ikeIntermediate --outform der &gt; ipsec.d/certs/vpn.crt.der</div><div class="line">strongswan pki --print --in ipsec.d/certs/vpn.crt.der</div><div class="line">openssl x509 -inform DER -in ipsec.d/certs/vpn.crt.der -noout -text</div><div class="line"></div><div class="line"></div><div class="line">strongswan pki --gen --type rsa --size 4096 --outform der &gt; ipsec.d/private/baiyangliu.key.der</div><div class="line">chmod 600 ipsec.d/private/baiyangliu.key.der</div><div class="line">strongswan pki --pub --in ipsec.d/private/baiyangliu.key.der --type rsa | strongswan pki --issue --lifetime 7300 --cacert ipsec.d/cacerts/ca.crt.der --cakey ipsec.d/private/ca.key.der --dn <span class="string">"C=CN, O=VPN, CN=vpn.0xa.in"</span> --san <span class="string">"lc@baiyangliu.com"</span> --outform der &gt; ipsec.d/certs/baiyangliu.crt.der</div><div class="line">openssl rsa -inform DER -in ipsec.d/private/baiyangliu.key.der -out ipsec.d/private/baiyangliu.key.pem -outform PEM</div><div class="line">openssl x509 -inform DER -in ipsec.d/certs/baiyangliu.crt.der -out ipsec.d/certs/baiyangliu.crt.pem -outform PEM</div><div class="line">openssl pkcs12 -export  -inkey ipsec.d/private/baiyangliu.key.pem -in ipsec.d/certs/baiyangliu.crt.pem -name <span class="string">"Baiyangliu VPN Certificate"</span>  -certfile ipsec.d/cacerts/ca.crt.pem -caname <span class="string">"StrongSwan Root CA"</span> -out baiyangliu.vpn.p12</div></pre></td></tr></table></figure>
@@ -161,8 +189,8 @@
     <title>Windows添加开机启动</title>
     <link href="https://baiyangliu.com/Windows%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8.html"/>
     <id>https://baiyangliu.com/Windows添加开机启动.html</id>
-    <published>2016-12-15T07:33:00.000Z</published>
-    <updated>2016-12-15T11:53:43.506Z</updated>
+    <published>2015-12-15T07:33:00.000Z</published>
+    <updated>2016-12-22T01:36:22.430Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Run]</div><div class="line">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunOnce]</div><div class="line">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServices]</div><div class="line">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce]</div><div class="line">[HKEY_LOCAL_MACHINE\Software\Microsoft\Windows NT\CurrentVersion\Winlogon\Userinit]</div><div class="line"></div><div class="line">[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Run]</div><div class="line">[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunOnce]</div><div class="line">[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunServices]</div><div class="line">[HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\RunServicesOnce]</div><div class="line">[HKEY_CURRENT_USER\Software\Microsoft\Windows NT\CurrentVersion\Windows]</div></pre></td></tr></table></figure>]]></content>
@@ -185,8 +213,8 @@
     <title>Nginx反向代理，tomcat request.getScheme() 总是返回http</title>
     <link href="https://baiyangliu.com/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%EF%BC%8Ctomcat-request-getScheme-%E6%80%BB%E6%98%AF%E8%BF%94%E5%9B%9Ehttp.html"/>
     <id>https://baiyangliu.com/Nginx反向代理，tomcat-request-getScheme-总是返回http.html</id>
-    <published>2016-12-15T07:32:00.000Z</published>
-    <updated>2016-12-15T11:53:18.210Z</updated>
+    <published>2015-12-15T07:32:00.000Z</published>
+    <updated>2016-12-22T01:36:27.578Z</updated>
     
     <content type="html"><![CDATA[<p>错误如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">request.getScheme()  <span class="comment">//总是 http，而不是实际的http或https  </span></div><div class="line">request.isSecure()  <span class="comment">//总是false（因为总是http）  </span></div><div class="line">request.getRemoteAddr()  <span class="comment">//总是 nginx 请求的 IP，而不是用户的IP  </span></div><div class="line">request.getRequestURL()  <span class="comment">//总是 nginx 请求的URL 而不是用户实际请求的 URL  </span></div><div class="line">response.sendRedirect( 相对url )  <span class="comment">//总是重定向到 http 上 （因为认为当前是 http 请求）</span></div></pre></td></tr></table></figure></p>
 <a id="more"></a>
@@ -214,8 +242,8 @@
     <title>让C# WebBrowser使用IE11</title>
     <link href="https://baiyangliu.com/%E8%AE%A9C#-WebBrowser%E4%BD%BF%E7%94%A8IE11.html"/>
     <id>https://baiyangliu.com/让C#-WebBrowser使用IE11.html</id>
-    <published>2016-12-15T07:31:25.000Z</published>
-    <updated>2016-12-15T11:54:13.324Z</updated>
+    <published>2015-12-15T07:31:25.000Z</published>
+    <updated>2016-12-22T01:36:04.127Z</updated>
     
     <content type="html"><![CDATA[<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Windows Registry Editor Version 5.00</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION]</div><div class="line">&quot;xxx.exe&quot;=dword:2af9</div><div class="line"></div><div class="line">[HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION]</div><div class="line">&quot;xxx.exe&quot;=dword:2af9</div></pre></td></tr></table></figure>
@@ -238,8 +266,8 @@
     <title>博客搬家</title>
     <link href="https://baiyangliu.com/hello.html"/>
     <id>https://baiyangliu.com/hello.html</id>
-    <published>2016-12-15T04:59:00.000Z</published>
-    <updated>2016-12-20T06:55:44.714Z</updated>
+    <published>2015-12-15T04:59:00.000Z</published>
+    <updated>2016-12-22T01:36:44.810Z</updated>
     
     <content type="html"><![CDATA[<p>折腾过Wordpress，折腾过Discuzz，折腾过Ghost，折腾过国内的各个博客……折腾来折腾去，以前写的好些东西都被折腾没了。不想再折腾了，以后就Hexo了。</p>
 ]]></content>

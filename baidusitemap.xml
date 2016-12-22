@@ -3,34 +3,53 @@
 
 
     
-    
   <url>
-    <loc>https://baiyangliu.com/hello.html</loc>
-    <lastmod>2016-12-20T06:55:44.714Z</lastmod>
+    <loc>https://baiyangliu.com/You-can-t-specify-target-table-xxx-for-update-in-FROM-clause.html</loc>
+    <lastmod>2016-12-22T10:11:53.187Z</lastmod>
     <data>
         <display>
-        <title>博客搬家</title>
-        <pubTime>2016-12-15T04:59:00.000Z</pubTime>
+        <title>You can't specify target table 'department_user' for update in FROM clause</title>
+        <pubTime>2016-12-22T09:51:00.000Z</pubTime>
         
+        <tag>MySQL</tag>
+         
          
            
+             
+              <breadCrumb title="编码" url="https://baiyangliu.com/categories/%E7%BC%96%E7%A0%81/"/>
+          
         </display>
     </data>
     </url>
 
     
-    
-    
-    
-    
+  <url>
+    <loc>https://baiyangliu.com/Nginx-HPKP-Config.html</loc>
+    <lastmod>2016-12-22T02:18:53.204Z</lastmod>
+    <data>
+        <display>
+        <title>Nginx HPKP Config</title>
+        <pubTime>2015-12-15T07:36:28.000Z</pubTime>
+        
+        <tag>ssl</tag>
+         
+         
+           
+             
+              <breadCrumb title="ssl" url="https://baiyangliu.com/categories/ssl/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>https://baiyangliu.com/CentOS7-Strongswan-IKEV2-Let-s-Encrypt.html</loc>
-    <lastmod>2016-12-15T11:55:08.559Z</lastmod>
+    <lastmod>2016-12-22T01:37:00.790Z</lastmod>
     <data>
         <display>
         <title>CentOS7 Strongswan IKEV2 Let's Encrypt</title>
-        <pubTime>2016-12-15T07:37:08.000Z</pubTime>
+        <pubTime>2015-12-15T07:37:08.000Z</pubTime>
         
         <tag>Strongswan</tag>
          
@@ -46,11 +65,11 @@
     
   <url>
     <loc>https://baiyangliu.com/CentOS7-Strongswan-IKEV2-%E6%9E%B6%E8%AE%BE%E6%A2%AF%E5%AD%90.html</loc>
-    <lastmod>2016-12-15T11:54:58.184Z</lastmod>
+    <lastmod>2016-12-22T01:36:53.167Z</lastmod>
     <data>
         <display>
         <title>CentOS7 Strongswan IKEV2 架设梯子</title>
-        <pubTime>2016-12-15T07:34:00.000Z</pubTime>
+        <pubTime>2015-12-15T07:34:00.000Z</pubTime>
         
         <tag>Strongswan</tag>
          
@@ -65,15 +84,13 @@
 
     
   <url>
-    <loc>https://baiyangliu.com/%E8%AE%A9C#-WebBrowser%E4%BD%BF%E7%94%A8IE11.html</loc>
-    <lastmod>2016-12-15T11:54:13.324Z</lastmod>
+    <loc>https://baiyangliu.com/hello.html</loc>
+    <lastmod>2016-12-22T01:36:44.810Z</lastmod>
     <data>
         <display>
-        <title>让C# WebBrowser使用IE11</title>
-        <pubTime>2016-12-15T07:31:25.000Z</pubTime>
+        <title>博客搬家</title>
+        <pubTime>2015-12-15T04:59:00.000Z</pubTime>
         
-        <tag>c#</tag>
-         
          
            
         </display>
@@ -82,19 +99,19 @@
 
     
   <url>
-    <loc>https://baiyangliu.com/Windows%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8.html</loc>
-    <lastmod>2016-12-15T11:53:43.506Z</lastmod>
+    <loc>https://baiyangliu.com/JSON%E5%8E%8B%E7%BC%A9%E6%96%B9%E6%A1%88.html</loc>
+    <lastmod>2016-12-22T01:36:39.475Z</lastmod>
     <data>
         <display>
-        <title>Windows添加开机启动</title>
-        <pubTime>2016-12-15T07:33:00.000Z</pubTime>
+        <title>JSON压缩方案</title>
+        <pubTime>2015-12-15T07:38:41.000Z</pubTime>
         
-        <tag>Windows</tag>
+        <tag>JSON</tag>
          
          
            
              
-              <breadCrumb title="工具" url="https://baiyangliu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+              <breadCrumb title="高性能" url="https://baiyangliu.com/categories/%E9%AB%98%E6%80%A7%E8%83%BD/"/>
           
         </display>
     </data>
@@ -103,11 +120,11 @@
     
   <url>
     <loc>https://baiyangliu.com/Nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%EF%BC%8Ctomcat-request-getScheme-%E6%80%BB%E6%98%AF%E8%BF%94%E5%9B%9Ehttp.html</loc>
-    <lastmod>2016-12-15T11:53:18.210Z</lastmod>
+    <lastmod>2016-12-22T01:36:27.578Z</lastmod>
     <data>
         <display>
         <title>Nginx反向代理，tomcat request.getScheme() 总是返回http</title>
-        <pubTime>2016-12-15T07:32:00.000Z</pubTime>
+        <pubTime>2015-12-15T07:32:00.000Z</pubTime>
         
         <tag>Nginx</tag>
          
@@ -124,39 +141,19 @@
 
     
   <url>
-    <loc>https://baiyangliu.com/Nginx-HPKP-Config.html</loc>
-    <lastmod>2016-12-15T11:52:25.442Z</lastmod>
+    <loc>https://baiyangliu.com/Windows%E6%B7%BB%E5%8A%A0%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8.html</loc>
+    <lastmod>2016-12-22T01:36:22.430Z</lastmod>
     <data>
         <display>
-        <title>Nginx HPKP Config</title>
-        <pubTime>2016-12-15T07:36:28.000Z</pubTime>
+        <title>Windows添加开机启动</title>
+        <pubTime>2015-12-15T07:33:00.000Z</pubTime>
         
-        <tag>ssl</tag>
+        <tag>Windows</tag>
          
          
            
              
-              <breadCrumb title="ssl" url="https://baiyangliu.com/categories/ssl/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://baiyangliu.com/JSON%E5%8E%8B%E7%BC%A9%E6%96%B9%E6%A1%88.html</loc>
-    <lastmod>2016-12-15T11:51:20.944Z</lastmod>
-    <data>
-        <display>
-        <title>JSON压缩方案</title>
-        <pubTime>2016-12-15T07:38:41.000Z</pubTime>
-        
-        <tag>JSON</tag>
-         
-         
-           
-             
-              <breadCrumb title="高性能" url="https://baiyangliu.com/categories/%E9%AB%98%E6%80%A7%E8%83%BD/"/>
+              <breadCrumb title="工具" url="https://baiyangliu.com/categories/%E5%B7%A5%E5%85%B7/"/>
           
         </display>
     </data>
@@ -165,11 +162,11 @@
     
   <url>
     <loc>https://baiyangliu.com/%E5%88%98%E6%B0%8F%E5%AE%B6%E6%97%8F.html</loc>
-    <lastmod>2016-12-15T11:30:26.611Z</lastmod>
+    <lastmod>2016-12-22T01:36:13.716Z</lastmod>
     <data>
         <display>
         <title>刘氏家族</title>
-        <pubTime>2016-12-15T07:34:27.000Z</pubTime>
+        <pubTime>2015-12-15T07:34:27.000Z</pubTime>
         
          
            
@@ -177,6 +174,29 @@
     </data>
     </url>
 
+    
+  <url>
+    <loc>https://baiyangliu.com/%E8%AE%A9C#-WebBrowser%E4%BD%BF%E7%94%A8IE11.html</loc>
+    <lastmod>2016-12-22T01:36:04.127Z</lastmod>
+    <data>
+        <display>
+        <title>让C# WebBrowser使用IE11</title>
+        <pubTime>2015-12-15T07:31:25.000Z</pubTime>
+        
+        <tag>c#</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+    
+    
+    
     
     
     
