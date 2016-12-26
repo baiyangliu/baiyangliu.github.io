@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://baiyangliu.com/"/>
-  <updated>2016-12-22T10:24:39.903Z</updated>
+  <updated>2016-12-26T06:56:19.491Z</updated>
   <id>https://baiyangliu.com/</id>
   
   <author>
@@ -14,6 +14,58 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Nginx配置优化之启用keep-alive</title>
+    <link href="https://baiyangliu.com/Nginx%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96%E4%B9%8B%E5%90%AF%E7%94%A8keep-alive.html"/>
+    <id>https://baiyangliu.com/Nginx配置优化之启用keep-alive.html</id>
+    <published>2016-12-26T06:56:16.000Z</published>
+    <updated>2016-12-26T06:56:19.491Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="默认配置时"><a href="#默认配置时" class="headerlink" title="默认配置时"></a>默认配置时</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">GET / HTTP/1.0</div><div class="line">Host: d1.kingopen.cn</div><div class="line">X-Real-IP: 192.168.1.1</div><div class="line">X-Forwarded-For: 192.168.1.1</div><div class="line">X-Forwarded-Proto: https</div><div class="line">X-Forwarded-Port: 443</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div><div class="line">Connection: close</div><div class="line">upgrade-insecure-requests: 1</div><div class="line">user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36</div><div class="line">dnt: 1</div><div class="line">accept-encoding: gzip, deflate, sdch, br</div><div class="line">accept-language: zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4</div></pre></td></tr></table></figure>
+<h6 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">proxy_http_version    1.1;</div><div class="line"></div><div class="line">upstream backends &#123;</div><div class="line">    server 192.168.1.129;</div><div class="line">    keepalive 128;</div><div class="line">&#125;</div><div class="line"></div><div class="line">locatioin / &#123;</div><div class="line">    proxy_set_header  Connection &quot;&quot;;</div><div class="line">    proxy_pass        http://backends;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h6 id="再次请求"><a href="#再次请求" class="headerlink" title="再次请求"></a>再次请求</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">GET / HTTP/1.1</div><div class="line">Host: baiyangliu.com</div><div class="line">X-Real-IP: 192.168.1.1</div><div class="line">X-Forwarded-For: 192.168.1.1</div><div class="line">X-Forwarded-Proto: https</div><div class="line">X-Forwarded-Port: 443</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div><div class="line">upgrade-insecure-requests: 1</div><div class="line">user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36</div><div class="line">dnt: 1</div><div class="line">accept-encoding: gzip, deflate, sdch, br</div><div class="line">accept-language: zh-CN,zh;q=0.8,en-US;q=0.6,en;q=0.4</div></pre></td></tr></table></figure>
+<p>可以发现<code>HTTP/1.0</code>编程<code>HTTP/1.1</code>，<code>Connection: close</code>被移除。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h6 id=&quot;默认配置时&quot;&gt;&lt;a href=&quot;#默认配置时&quot; class=&quot;headerlink&quot; title=&quot;默认配置时&quot;&gt;&lt;/a&gt;默认配置时&lt;/h6&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;
+    
+    </summary>
+    
+      <category term="Nginx" scheme="https://baiyangliu.com/categories/Nginx/"/>
+    
+    
+      <category term="Nginx" scheme="https://baiyangliu.com/tags/Nginx/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nginx配置优化之启用HTTP1.0</title>
+    <link href="https://baiyangliu.com/Nginx%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96%E4%B9%8B%E5%90%AF%E7%94%A8HTTP1.0.html"/>
+    <id>https://baiyangliu.com/Nginx配置优化之启用HTTP1.0.html</id>
+    <published>2016-12-26T06:15:32.000Z</published>
+    <updated>2016-12-26T06:55:56.979Z</updated>
+    
+    <content type="html"><![CDATA[<h6 id="默认配置时"><a href="#默认配置时" class="headerlink" title="默认配置时"></a>默认配置时</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GET / HTTP/1.0</div><div class="line">Host: d1.kingopen.cn</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></pre></td></tr></table></figure>
+<h6 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxy_http_version    1.1;</div></pre></td></tr></table></figure>
+<h6 id="再次请求"><a href="#再次请求" class="headerlink" title="再次请求"></a>再次请求</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">GET / HTTP/1.1</div><div class="line">Host: baiyangliu.com</div><div class="line">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8</div></pre></td></tr></table></figure>
+<p>可以发现<code>HTTP/1.0</code>变成<code>HTTP/1.1</code>，<code>Connection: close</code>被移除。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h6 id=&quot;默认配置时&quot;&gt;&lt;a href=&quot;#默认配置时&quot; class=&quot;headerlink&quot; title=&quot;默认配置时&quot;&gt;&lt;/a&gt;默认配置时&lt;/h6&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;
+    
+    </summary>
+    
+      <category term="Nginx" scheme="https://baiyangliu.com/categories/Nginx/"/>
+    
+    
+      <category term="Nginx" scheme="https://baiyangliu.com/tags/Nginx/"/>
+    
+  </entry>
   
   <entry>
     <title>You can&#39;t specify target table &#39;department_user&#39; for update in FROM clause</title>
