@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://baiyangliu.com/"/>
-  <updated>2016-12-29T11:38:00.170Z</updated>
+  <updated>2016-12-29T11:39:04.046Z</updated>
   <id>https://baiyangliu.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://baiyangliu.com/%E4%BD%BF%E7%94%A8rsync%E8%BF%9B%E8%A1%8C%E5%A2%9E%E9%87%8F%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2.html"/>
     <id>https://baiyangliu.com/使用rsync进行增量代码部署.html</id>
     <published>2016-12-28T09:21:39.000Z</published>
-    <updated>2016-12-29T11:38:00.170Z</updated>
+    <updated>2016-12-29T11:39:04.046Z</updated>
     
     <content type="html"><![CDATA[<h5 id="问题来源"><a href="#问题来源" class="headerlink" title="问题来源"></a>问题来源</h5><p>做过Java开发的都知道，Java有着丰富的类库，你所想要的功能，几乎都有开源实现。但问题是，依赖库的递归依赖，使得编译出的文件非常庞大。再者，每次重新部署，其实都只做了“相当少”的代码更新。如果是在公网环境，情况会更加糟糕。。。</p>
 <blockquote>
@@ -34,7 +34,7 @@
 <h6 id="添加防火墙例外"><a href="#添加防火墙例外" class="headerlink" title="添加防火墙例外"></a>添加防火墙例外</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=dmz --add-port=873/tcp --permanent</div><div class="line">firewall-cmd --reload</div></pre></td></tr></table></figure>
 <h6 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start rsyncd</div></pre></td></tr></table></figure>
 <h6 id="编译脚本（build-bat）"><a href="#编译脚本（build-bat）" class="headerlink" title="编译脚本（build.bat）"></a>编译脚本（build.bat）</h6><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">@echo off</div><div class="line"></div><div class="line">set "CURRENT_DIR=%cd%"</div><div class="line">svn co https://xxx %TMP%\xxx</div><div class="line">svn update "%TMP%\xxx"</div><div class="line"></div><div class="line">cd /D "%TMP%\xxx"</div><div class="line"></div><div class="line">call gradle clean bootRepackage</div><div class="line"></div><div class="line">call unzip -o   xxx/build/libs/*.jar -d xxx/build/libs/xxx</div><div class="line"></div><div class="line">cd xxx/build/libs/xxx</div><div class="line"></div><div class="line">set "src=/cygdrive/%CD::=/%"</div><div class="line">set "src=%src:\=/%"</div><div class="line"></div><div class="line">cd /D %CURRENT_DIR%</div><div class="line"></div><div class="line">rem rsync下载地址(http://www.brentnorris.net/rsync.zip)</div><div class="line">call rsync -vzrtopg --delete --progress --password-file=./rsyncd.secrets %src% user1@你的服务器地址::app</div><div class="line"></div><div class="line"></div><div class="line">rem plink下载地址(https://the.earth.li/~sgtatham/putty/latest/x86/plink.exe)</div><div class="line">call plink -ssh root@你的服务器地址 systemctl daemon-reload</div><div class="line">call plink -ssh root@你的服务器地址 systemctl enable  "xxx.service"</div><div class="line">call plink -ssh root@你的服务器地址 systemctl restart "xxx.service"</div><div class="line"></div><div class="line">cd /D %CURRENT_DIR%</div></pre></td></tr></table></figure>
-<p>注意：rsyncd.secrets文件内容为123456。</p>
+<p>注意：客户端rsyncd.secrets文件内容为123456。</p>
 ]]></content>
     
     <summary type="html">
