@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://baiyangliu.com/"/>
-  <updated>2016-12-26T09:47:15.682Z</updated>
+  <updated>2016-12-29T09:52:48.722Z</updated>
   <id>https://baiyangliu.com/</id>
   
   <author>
@@ -14,6 +14,44 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用rsync进行增量代码部署</title>
+    <link href="https://baiyangliu.com/%E4%BD%BF%E7%94%A8rsync%E8%BF%9B%E8%A1%8C%E5%A2%9E%E9%87%8F%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2.html"/>
+    <id>https://baiyangliu.com/使用rsync进行增量代码部署.html</id>
+    <published>2016-12-28T09:21:39.000Z</published>
+    <updated>2016-12-29T09:52:48.722Z</updated>
+    
+    <content type="html"><![CDATA[<h5 id="问题来源"><a href="#问题来源" class="headerlink" title="问题来源"></a>问题来源</h5><p>做过Java开发的都知道，Java有着丰富的类库，你所想要的功能，几乎都有开源实现。但问题是，依赖库的递归依赖，使得编译出的文件非常庞大。再者，每次重新部署，其实都只做了“相当少”的代码更新。如果是在公网环境，情况会更加糟糕。。。</p>
+<blockquote>
+<p>rsync是类unix系统下的数据镜像备份工具——remote sync。一款快速增量备份工具 Remote Sync，远程同步 支持本地复制，或者与其他SSH、rsync主机同步。</p>
+</blockquote>
+<a id="more"></a>
+<h5 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h5><p>如上所述，既然每次都做了大量的无用功，能不能避免呢？当然可以，rsync就可以做到。本文以Spring Boot程序为例，对于静态文件、PHP、NodeJS等都适用。服务端使用CentOS7.2，客户端Windows10。</p>
+<h5 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h5><h6 id="服务端安装"><a href="#服务端安装" class="headerlink" title="服务端安装"></a>服务端安装</h6><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> rsync -y</div><div class="line">systemctl <span class="keyword">enable</span> rsyncd.service</div></pre></td></tr></table></figure>
+<h6 id="修改配置文件vim-etc-rsyncd-conf"><a href="#修改配置文件vim-etc-rsyncd-conf" class="headerlink" title="修改配置文件vim /etc/rsyncd.conf"></a>修改配置文件<code>vim /etc/rsyncd.conf</code></h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#认证用户名和密码文件的名称和位置</span></div><div class="line">secrets file = /etc/rsyncd.secrets</div><div class="line"><span class="comment">#欢迎文件，可自己编辑</span></div><div class="line">motd file = /etc/rsyncd.motd</div><div class="line"><span class="built_in">read</span>&gt;list = yes</div><div class="line">uid = root</div><div class="line">gid = root</div><div class="line">use chroot = no</div><div class="line">max connections = 5</div><div class="line"><span class="built_in">log</span> file = /var/<span class="built_in">log</span>/rsyncd.log</div><div class="line">pid file = /var/run/rsyncd.pid</div><div class="line">lock file = /var/run/rsync.lock</div><div class="line"></div><div class="line">[app]</div><div class="line">comment = app</div><div class="line">path = /opt/deploy</div><div class="line">auth users = user1</div><div class="line"><span class="built_in">read</span> only = no</div></pre></td></tr></table></figure>
+<h6 id="生成密码文件"><a href="#生成密码文件" class="headerlink" title="生成密码文件"></a>生成密码文件</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"user1:123456"</span> &gt;&gt; /etc/rsyncd.secrets</div><div class="line">chmod 600 /etc/rsyncd.secrets</div></pre></td></tr></table></figure>
+<h6 id="添加防火墙例外"><a href="#添加防火墙例外" class="headerlink" title="添加防火墙例外"></a>添加防火墙例外</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">firewall-cmd --zone=dmz --add-port=873/tcp --permanent</div><div class="line">firewall-cmd --reload</div></pre></td></tr></table></figure>
+<h6 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">systemctl start rsyncd</div></pre></td></tr></table></figure>
+<h6 id="客户端配置"><a href="#客户端配置" class="headerlink" title="客户端配置"></a>客户端配置</h6><p>Window版本的rsync一直没搞定，报错ERROR: password file must be owned by root when running as root rsync error: syntax or usage error，有人说将密码文件的所有者改为管理员用户，我没搞定，后面再研究。得益于<a href="http://jingyan.baidu.com/article/5552ef47ef0b87518ffbc935.html" target="_blank" rel="external">Windows10 Linux子系统</a>技术，能够在Windows下直接执行shell脚本。</p>
+<h6 id="编译脚本（build-bat）"><a href="#编译脚本（build-bat）" class="headerlink" title="编译脚本（build.bat）"></a>编译脚本（build.bat）</h6><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">@echo off</div><div class="line"></div><div class="line">set "CURRENT_DIR=%cd%"</div><div class="line">svn co https://xxx %TMP%\xxx</div><div class="line">svn update "%TMP%\xxx"</div><div class="line"></div><div class="line">cd /D "%TMP%\xxx"</div><div class="line"></div><div class="line">call gradle clean bootRepackage</div><div class="line"></div><div class="line">call unzip -o   xxx/build/libs/*.jar -d xxx/build/libs/xxx</div><div class="line"></div><div class="line">cd xxx/build/libs/xxx</div><div class="line">set "src=%CD:\=/%"</div><div class="line">set "src=%src::=%"</div><div class="line"></div><div class="line">cd /D "%CURRENT_DIR%"</div><div class="line">call bash sync.sh "%src%"</div><div class="line"></div><div class="line">rem plink下载地址(https://the.earth.li/~sgtatham/putty/latest/x86/plink.exe)</div><div class="line">call plink -ssh root@你的服务器地址 systemctl daemon-reload</div><div class="line">call plink -ssh root@你的服务器地址 systemctl enable  "xxx.service"</div><div class="line">call plink -ssh root@你的服务器地址 systemctl restart "xxx.service"</div><div class="line"></div><div class="line">cd /D %CURRENT_DIR%</div></pre></td></tr></table></figure>
+<h6 id="同步脚本（sync-sh）"><a href="#同步脚本（sync-sh）" class="headerlink" title="同步脚本（sync.sh）"></a>同步脚本（sync.sh）</h6><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#/usr/bin/sh env</span></div><div class="line"></div><div class="line"><span class="built_in">echo</span>  123456&gt;/home/rsyncd.secrets</div><div class="line">chmod 600 /home/rsyncd.secrets</div><div class="line">src=`<span class="built_in">echo</span> <span class="variable">$1</span> |cut -c1 |tr <span class="string">'[:upper:]'</span> <span class="string">'[:lower:]'</span>``<span class="built_in">echo</span> <span class="variable">$1</span> |cut -c2-`</div><div class="line">src=<span class="string">"/mnt/<span class="variable">$src</span>"</span></div><div class="line">rsync -vzrtopg --delete --progress \</div><div class="line">--password-file=/home/rsyncd.secrets \</div><div class="line"><span class="string">"<span class="variable">$src</span>"</span> user1@你的服务器地址::app</div></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h5 id=&quot;问题来源&quot;&gt;&lt;a href=&quot;#问题来源&quot; class=&quot;headerlink&quot; title=&quot;问题来源&quot;&gt;&lt;/a&gt;问题来源&lt;/h5&gt;&lt;p&gt;做过Java开发的都知道，Java有着丰富的类库，你所想要的功能，几乎都有开源实现。但问题是，依赖库的递归依赖，使得编译出的文件非常庞大。再者，每次重新部署，其实都只做了“相当少”的代码更新。如果是在公网环境，情况会更加糟糕。。。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;rsync是类unix系统下的数据镜像备份工具——remote sync。一款快速增量备份工具 Remote Sync，远程同步 支持本地复制，或者与其他SSH、rsync主机同步。&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="工具" scheme="https://baiyangliu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+    
+    
+      <category term="rsync" scheme="https://baiyangliu.com/tags/rsync/"/>
+    
+  </entry>
   
   <entry>
     <title>Nginx配置优化之启用keep-alive</title>

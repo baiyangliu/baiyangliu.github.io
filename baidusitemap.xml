@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>https://baiyangliu.com/%E4%BD%BF%E7%94%A8rsync%E8%BF%9B%E8%A1%8C%E5%A2%9E%E9%87%8F%E4%BB%A3%E7%A0%81%E9%83%A8%E7%BD%B2.html</loc>
+    <lastmod>2016-12-29T09:52:48.722Z</lastmod>
+    <data>
+        <display>
+        <title>使用rsync进行增量代码部署</title>
+        <pubTime>2016-12-28T09:21:39.000Z</pubTime>
+        
+        <tag>rsync</tag>
+         
+         
+           
+             
+              <breadCrumb title="工具" url="https://baiyangliu.com/categories/%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://baiyangliu.com/Nginx%E9%85%8D%E7%BD%AE%E4%BC%98%E5%8C%96%E4%B9%8B%E5%90%AF%E7%94%A8HTTP1.1.html</loc>
     <lastmod>2016-12-27T11:07:56.387Z</lastmod>
     <data>
