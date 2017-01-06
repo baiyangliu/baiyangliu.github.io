@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://baiyangliu.com/static.json</loc>
+    
+    <lastmod>2017-01-06T02:15:32.724Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://baiyangliu.com/You%20can't%20specify%20target%20table%20xxx%20for%20update%20in%20FROM%20clause.html</loc>
     
     <lastmod>2017-01-05T09:54:08.000Z</lastmod>
