@@ -6,8 +6,13 @@ branches:
 before_script:
   - npm install -g hexo
   - npm install -g hexo-cli
+  - npm install -g gulp
 install:
   - npm install
+script:
+  - hexo clean
+  - hexo g
+  - gulp
 after_success:
   #- hexo deploy
   - cd ./public
