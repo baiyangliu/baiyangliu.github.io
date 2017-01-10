@@ -10,7 +10,6 @@ before_script:
 install:
   - npm install
 script:
-  - hexo clean
   - hexo g
   - gulp
 after_success:
@@ -22,3 +21,11 @@ after_success:
   - git add .
   - git commit -m "Updated by travis-ci at $(date)"
   - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
+  
+  - echo "$SSH_KEY" > id_rsa
+  - ssh-agent -s
+  - ssh-add id_rsa
+  - rm -rf id_rsa
+  
+  git push --force https://git.oschina.net/baiyangliu/baiyangliu.git master:master
+  git push --force https://git.coding.net/baiyangliu/baiyangliu.git master:master
