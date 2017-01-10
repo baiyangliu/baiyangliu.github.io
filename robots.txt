@@ -1,1 +1,6 @@
 User-agent: *
+Allow: /
+Allow: /categories.html
+Allow: /tags.html
+Allow: /about.html
+Sitemap: /sitemap.xml
