@@ -23,7 +23,7 @@ after_success:
   - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
   
   - echo -e "$SSH_KEY" > id_rsa
-  - ssh-agent -s
+  - eval $(ssh-agent -s)
   - ssh-add id_rsa
   - rm -rf id_rsa
   
