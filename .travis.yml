@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+  - "6"
+cache:
+  directories:
+    - node_modules
+before_script:
+  - git clone --branch master https://github.com/baiyangliu/baiyangliu.github.io.git public
+script:
+  - npm run build
+after_success:
+  - cd public
+  - git config user.name "baiyangliu@Travis" 
+  - git config user.email "cun.liu@qq.com"
+  - git add --all .
+  - git commit -m "Travis CI Auto Builder"
+  - git push https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master
+branches:
+  only:
+    - raw
