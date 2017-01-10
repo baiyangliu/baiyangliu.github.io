@@ -13,7 +13,7 @@ before_script:
 install:
   - npm install
 after_success:
-  - hexo deploy
+  #- hexo deploy
   - cd public
   - git add --all .
   - git commit -m "Updated"
