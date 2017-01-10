@@ -12,8 +12,8 @@ after_success:
   #- hexo deploy
   - cd ./public
   - git init
-  - git config --global user.name "baiyangliu@Travis" 
+  - git config --global user.name "baiyangliu" 
   - git config --global user.email "cun.liu@qq.com"
   - git add .
   - git commit -m "Updated"
-  - git push --force --quiet https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
+  - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
