@@ -20,5 +20,5 @@ after_success:
   - git config --global user.name "baiyangliu" 
   - git config --global user.email "cun.liu@qq.com"
   - git add .
-  - git commit -m "Updated"
+  - git commit -m "Updated by travis-ci at $(date)"
   - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
