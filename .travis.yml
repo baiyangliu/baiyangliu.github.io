@@ -23,9 +23,11 @@ after_success:
   - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
   
   - echo -e "$SSH_KEY" > id_rsa
+  - chmod 600 id_rsa
   - eval $(ssh-agent -s)
   - ssh-add id_rsa
   - rm -rf id_rsa
-  - ssh -o StrictHostKeyChecking=no cun.liu@qq.com
+  - ssh -o "StrictHostKeyChecking no" baiyangliu@git.oschina.net
+  - ssh -o "StrictHostKeyChecking no" baiyangliu@git.coding.net
   - git push --force git@git.oschina.net:baiyangliu/baiyangliu.git master:master
   - git push --force git@git.coding.net:baiyangliu/baiyangliu.git master:master
