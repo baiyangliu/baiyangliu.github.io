@@ -10,10 +10,10 @@ install:
   - npm install
 after_success:
   #- hexo deploy
-  - cd public
+  - cd ./public
   - git init
-  - git add .
   - git config --global user.name "baiyangliu@Travis" 
   - git config --global user.email "cun.liu@qq.com"
+  - git add .
   - git commit -m "Updated"
   - git push --force --quiet https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
