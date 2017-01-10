@@ -1,4 +1,5 @@
 language: node_js
+node_js: stable
 branches:
   only:
     - raw
@@ -6,8 +7,8 @@ before_install:
   - npm install -g hexo
   - npm install -g hexo-cli
 before_script:
-  - git config user.name "baiyangliu@Travis" 
-  - git config user.email "cun.liu@qq.com"
+  - git config --global user.name "baiyangliu@Travis" 
+  - git config --global user.email "cun.liu@qq.com"
   - git clone --branch master https://github.com/baiyangliu/baiyangliu.github.io.git public
 install:
   - npm install
@@ -15,5 +16,5 @@ after_success:
   - hexo deploy
   - cd public
   - git add --all .
-  - git commit -m "Update"
+  - git commit -m "Updated"
   - git push https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master
