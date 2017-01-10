@@ -22,7 +22,7 @@ after_success:
   - git commit -m "Updated by travis-ci at $(date)"
   - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
   
-  - echo "$SSH_KEY" > id_rsa
+  - echo -e "$SSH_KEY" > id_rsa
   - ssh-agent -s
   - ssh-add id_rsa
   - rm -rf id_rsa
