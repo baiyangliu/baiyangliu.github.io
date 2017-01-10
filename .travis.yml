@@ -23,6 +23,11 @@ after_success:
   - git commit -m "Updated by travis-ci at $(date)"
   - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
   
+  - echo $RSYNC_SECRET > rsync.secret
+  - chmod 600 rsync.secret
+  - rsync -vzrtopg --delete --progress --password-file=./rsync.secret ./public/* baiyangliu@baiyangliu.com::blog
+  - rm -rf rsync.secret
+  
   - echo -e "$SSH_KEY" > id_rsa
   - chmod 600 id_rsa
   - eval $(ssh-agent -s)
