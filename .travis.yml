@@ -27,7 +27,7 @@ after_success:
   - eval $(ssh-agent -s)
   - ssh-add id_rsa
   - rm -rf id_rsa
-  - ssh -o "StrictHostKeyChecking no" baiyangliu@git.oschina.net
-  - ssh -o "StrictHostKeyChecking no" baiyangliu@git.coding.net
+  - ssh -o "StrictHostKeyChecking no" git@git.oschina.net
+  - ssh -o "StrictHostKeyChecking no" git@git.coding.net
   - git push --force git@git.oschina.net:baiyangliu/baiyangliu.git master:master
   - git push --force git@git.coding.net:baiyangliu/baiyangliu.git master:master
