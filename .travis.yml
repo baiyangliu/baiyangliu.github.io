@@ -27,5 +27,5 @@ after_success:
   - ssh-add id_rsa
   - rm -rf id_rsa
   
-  - git push --force https://git.oschina.net/baiyangliu/baiyangliu.git master:master
-  - git push --force https://git.coding.net/baiyangliu/baiyangliu.git master:master
+  - git push --force git@git.oschina.net:baiyangliu/baiyangliu.git master:master
+  - git push --force git@git.coding.net:baiyangliu/baiyangliu.git master:master
