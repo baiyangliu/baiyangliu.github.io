@@ -4,7 +4,7 @@ tags:
 - Nginx
 - Tomcat
 categories:
-- 编码
+- Nginx
 date: 2015-12-15 15:32:00
 ---
 错误如下：
