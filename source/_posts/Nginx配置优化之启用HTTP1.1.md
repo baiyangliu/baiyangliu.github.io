@@ -1,8 +1,10 @@
 title: Nginx配置优化之启用HTTP1.1
 author: baiyangliu
 date: 2016-12-26 14:15:32
-tags: [Nginx]
-categories: [Nginx]
+tags:
+- Nginx
+categories:
+- Nginx配置
 ---
 ###### 默认配置时
 ```

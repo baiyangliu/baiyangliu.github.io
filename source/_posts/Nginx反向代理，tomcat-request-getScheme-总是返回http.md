@@ -1,7 +1,10 @@
 title: Nginx反向代理，tomcat request.getScheme() 总是返回http
 author: baiyangliu
-tags: [Nginx,Tomcat]
-categories: ["编码"]
+tags:
+- Nginx
+- Tomcat
+categories:
+- 编码
 date: 2015-12-15 15:32:00
 ---
 错误如下：

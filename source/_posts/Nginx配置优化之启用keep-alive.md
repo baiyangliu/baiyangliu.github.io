@@ -1,8 +1,10 @@
 title: Nginx配置优化之启用keep-alive
 author: baiyangliu
 date: 2016-12-26 14:56:16
-tags: [Nginx]
-categories: [Nginx]
+tags:
+- Nginx
+categories:
+-Nginx配置
 ---
 ###### 默认配置时
 ```

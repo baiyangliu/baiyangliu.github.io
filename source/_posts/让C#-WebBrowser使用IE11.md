@@ -1,6 +1,8 @@
 title: '让C# WebBrowser使用IE11'
 author: baiyangliu
 date: 2015-12-15 15:31:25
+categories:
+- 工具
 tags: [c#]
 ---
 <!--more-->

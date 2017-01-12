@@ -1,8 +1,10 @@
 title: JSON压缩方案
 author: baiyangliu
 date: 2015-12-15 15:38:41
-tags: [JSON]
-categories: [高性能]
+tags:
+- JSON
+categories:
+- 性能
 ---
 ![JSON](/imgs/json.png)
 <!--more-->

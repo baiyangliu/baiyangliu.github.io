@@ -1,6 +1,5 @@
 title: 博客搬家
-tags: []
-categories: []
+author: baiyangliu
 date: 2015-12-15 12:59:00
 description: 小小白杨，博客搬家。
 ---

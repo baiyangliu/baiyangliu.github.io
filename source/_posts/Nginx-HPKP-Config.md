@@ -1,8 +1,10 @@
 title: Nginx HPKP Config
 author: baiyangliu
 date: 2015-12-15 15:36:28
-tags: [ssl]
-categories: [ssl]
+tags:
+- ssl
+categories:
+- 安全
 ---
 以本站为例，采用的是Let's Encrypt免费证书`Let's Encrypt Authority X3`，序列号为`‎0a 01 41 42 00 00 01 53 85 73 6a 0b 85 ec a7 08`，以下是ca.cer
 <!--more-->

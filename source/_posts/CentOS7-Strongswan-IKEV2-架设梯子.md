@@ -1,7 +1,9 @@
 title: CentOS7 Strongswan IKEV2 架设梯子
 author: baiyangliu
-tags: [Strongswan]
-categories: [科学上网]
+tags:
+- Strongswan
+categories:
+- 科学上网
 date: 2015-12-15 15:34:00
 ---
 ![长城防火墙](/imgs/firewall.jpg)

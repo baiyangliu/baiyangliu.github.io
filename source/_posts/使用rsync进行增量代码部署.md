@@ -1,9 +1,9 @@
 title: 使用rsync进行增量代码部署
 author: baiyangliu
 tags:
-  - rsync
+- rsync
 categories:
-  - 工具
+- 工具
 date: 2016-12-28 17:21:39
 ---
 ##### 问题来源

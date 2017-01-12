@@ -1,8 +1,10 @@
 title: CentOS7 Strongswan IKEV2 Let's Encrypt
 author: baiyangliu
 date: 2015-12-15 15:37:08
-tags: [Strongswan]
-categories: [科学上网]
+tags:
+- Strongswan
+categories:
+- 科学上网
 ---
 前面介绍了如入用自签名证书，请参见[CentOS7 Strongswan IKEV2 架设梯子](http://0xa.in/aaaaa9)，这里介绍如何利用Let's Encrypt签发证书省去导入的麻烦。
 <!--more-->

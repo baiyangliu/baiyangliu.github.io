@@ -1,6 +1,8 @@
 title: Hexo+Github+Travis-ci搭建程序员自己的博客
 date: 2017-01-11 08:31:13
 categories:
+- 工具
+tags:
 - Hexo
 - Github
 - Travis-ci
