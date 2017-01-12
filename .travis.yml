@@ -20,6 +20,19 @@ after_success:
   - rm -rf rsync.secret
   
   - cd ./public
+  - echo "$BAIDU_VERIFY_CONTENT" > "$BAIDU_VERIFY_NAME"
+  - echo "$GOOGLE_VERIFY_CONTENT" > "$GOOGLE_VERIFY_NAME"
+  - echo "$360_VERIFY_CONTENT" > "$360_VERIFY_NAME"
+  
+  - echo "callback0({qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"});" > me0.js
+  - echo "callback1({qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"});" > me1.js
+  - echo "callback2({qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"});" > me2.js
+  - echo "callback3({qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"});" > me3.js
+  - echo "callback4({qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"});" > me4.js
+  
+  - echo "$TEST_SPEED_JS" > test_speed.js
+  - echo "$STATIC_JSON" > static.json
+  
   - git init
   - git config --global user.name "baiyangliu" 
   - git config --global user.email "cun.liu@qq.com"
