@@ -25,13 +25,13 @@ categories:
 国内的也可以申请[Coding](https://coding.net/)、[OSChina](https://git.oschina.net/)等，原理以及所有操作都一样。
 
 #### 新建Repository
-注意名字，例如：本人的Github帐号是<span style="color:red;">**`baiyangliu`**</span>，那么你新建的这个Repository名字<span style="color:red;">**`必须是baiyangliu.github.io`**</span>，原因不作多说。
+注意名字，例如：本人的Github帐号是<font style="color:red;">**baiyangliu**</font>，那么你新建的这个Repository名字<font style="color:red;">**必须是baiyangliu.github.io**</font>，原因不作多说。
 
 #### 新建raw分支
 将Hexo源码文件放到raw分支，push到Github。
 
 #### 配置Access Token
-[打开](https://github.com/settings/tokens/new)配置页，Token描述随便写（Hexo deployment），勾选和public_repo和user:email，点击Generate token，记下此token，该token<span style="color:red;">**`只会在新建成功的时候显示一次，忘了必须删掉重新生成！！！`**</span>
+[打开](https://github.com/settings/tokens/new)配置页，Token描述随便写（Hexo deployment），勾选和public_repo和user:email，点击Generate token，记下此token，该token<font style="color:red;">**只会在新建成功的时候显示一次，忘了必须删掉重新生成！！！**</font>
 
 #### 配置SSH公钥
 若果不想使用Coding和OSChina可以忽略这一步，Github本身也可以这么做，但是这里采用Access Token方案。
