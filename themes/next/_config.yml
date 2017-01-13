@@ -395,13 +395,13 @@ calendar:
 
 # Algolia Search
 algolia_search:
-  enable: false
+  enable: true
   hits:
     per_page: 10
   labels:
-    input_placeholder: Search for Posts
-    hits_empty: "We didn't find any results for the search: ${query}"
-    hits_stats: "${hits} results found in ${time} ms"
+    input_placeholder: "搜索"
+    hits_empty: "未找到匹配的关键词：${query}"
+    hits_stats: "找到 ${hits} 条数据，用时 ${time} 毫秒"
 
 
 
