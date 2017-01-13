@@ -108,3 +108,11 @@ baidu_url_submit:
   host: baiyangliu.com
   token: zPRe1g0N1jYptQtA
   path: baidu_urls.txt
+  
+  
+algolia:
+  applicationID: 'WA91NRM1DO'
+  apiKey: 'b6f43636e6365d26679c4c8dd5fd5c25'
+  adminApiKey: '1ebf66637c4f2001203cac6102b74565'
+  indexName: 'baiyangliu'
+  chunkSize: 5000

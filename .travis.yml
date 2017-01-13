@@ -12,6 +12,7 @@ install:
 script:
   - hexo clean
   - hexo g
+  - hexo algolia
   - gulp
 after_success:
   - echo $RSYNC_SECRET > rsync.secret
