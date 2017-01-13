@@ -38,7 +38,7 @@ seo: true
 menu:
   home: /
   categories: /categories.html
-  #archives: /archives
+  archives: /archives
   tags: /tags.html
   sitemap: /sitemap.xml
   about: /about.html

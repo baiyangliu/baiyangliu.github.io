@@ -4,7 +4,7 @@ date: 2016-12-26 14:56:16
 tags:
 - Nginx
 categories:
--Nginx
+- Nginx配置
 ---
 ###### 默认配置时
 ```
