@@ -22,7 +22,6 @@ after_success:
   
   - cd ./public
   - echo "$BAIDU_VERIFY_CONTENT" > "$BAIDU_VERIFY_NAME"
-  - echo "$GOOGLE_VERIFY_CONTENT" > "$GOOGLE_VERIFY_NAME"
   - echo "$WEBSCAN_360_VERIFY_CONTENT" > "$WEBSCAN_360_VERIFY_NAME"
   
   - echo 'callback0({qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"});' > me0.js
