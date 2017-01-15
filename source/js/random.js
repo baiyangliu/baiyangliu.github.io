@@ -9,9 +9,9 @@ _g = function() {
     var done = 0;
     var str = "";
     var len = $("#_i_p_t").val();
-    var total = parseInt(len >> 13);
-    var last = len % 8192;
-    total += last==0 ? 0 : 1;
+    var total = 8;
+    var _len = len / total;
+    var last = len % total;
 
     var work = function(len) {
         var worker = new Worker("/js/random_worker.js");
@@ -28,6 +28,6 @@ _g = function() {
         });
     };
     for (var i = 0; i < total; i++) {
-        work(i == total ? 8192 : last);
+        work(i == total ? _len : _len + last);
     }
 };
