@@ -400,8 +400,8 @@ algolia_search:
     per_page: 10
   labels:
     input_placeholder: "搜索"
-    hits_empty: "未找到匹配的关键词：${query}"
-    hits_stats: "找到 ${hits} 条数据，用时 ${time} 毫秒"
+    hits_empty: "未找到与”<font style='color:red;font-weight:bold;'>${query}</font>“配置的页面"
+    hits_stats: "找到 <font style='color:green;font-weight:bold;'>${hits}</font> 条数据，用时 <font style='color:green;font-weight:bold;'>${time}</font> 毫秒"
 
 
 
