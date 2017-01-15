@@ -22,12 +22,12 @@ _g = function() {
                 $("#_result").html(str).show();
             }
         };
-        work.postMessage({
+        worker.postMessage({
             specal: specal,
             len: len
         });
     };
     for (var i = 0; i < total; i++) {
-        worker(i == total ? 8192 : last);
+        work(i == total ? 8192 : last);
     }
 };
