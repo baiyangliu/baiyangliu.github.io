@@ -27,6 +27,11 @@ _g = function() {
         });
     };
     for (var i = 0; i <= total; i++) {
-        worker(i == total ? 8192 : last);
+        if (i == total){
+            worker(8192);
+        } else {
+            worker(last);
+        }
+        
     }
 };
