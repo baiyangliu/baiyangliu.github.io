@@ -12,7 +12,7 @@ _g = function() {
         });
     };
     var len = $("#_i_p_t").val();
-    if(len<=1024){
+    if(len<1024){
         work(len);
         return;
     }
