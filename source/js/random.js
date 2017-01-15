@@ -12,6 +12,10 @@ _g = function() {
         });
     };
     var len = $("#_i_p_t").val();
+    if(len<=1024){
+        work(len);
+        return;
+    }
     var total = 16;
     var _len = parseInt(len / total);
     var last = len % total;
