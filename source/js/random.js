@@ -1,6 +1,6 @@
 _g = function() {
     var specal = $("#_specal_").is(":checked");
-    $("#_result").html("").hide();
+    $("#_result").html("");
     var work = function(len) {
         var worker = new Worker("/js/random_worker.js");
         worker.onmessage = function(evt) {
