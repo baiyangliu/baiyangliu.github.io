@@ -6,11 +6,12 @@ _g = function() {
         specal = true;
     }
 
-    var done = -1;
+    var done = 0;
     var str = "";
     var len = $("#_i_p_t").val();
     var total = parseInt(len >> 13);
     var last = len % 8192;
+    total += last==0 ? 0 : 1;
 
     var work = function(len) {
         var worker = new Worker("/js/random_worker.js");
@@ -26,12 +27,7 @@ _g = function() {
             len: len
         });
     };
-    for (var i = 0; i <= total; i++) {
-        if (i == total){
-            worker(8192);
-        } else {
-            worker(last);
-        }
-        
+    for (var i = 0; i < total; i++) {
+        worker(i == total ? 8192 : last);
     }
 };
