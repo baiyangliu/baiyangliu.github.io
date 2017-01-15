@@ -17,7 +17,7 @@
   <script src="{{ url_for(theme.js) }}/src/algolia-search.js?v={{ theme.version }}"></script>
   <script>
     $(document).bind("keydown", function (e) { 
-      if (e.keyCode === 70 && e.ctrlKey) {
+      if (e.keyCode === 70 && e.ctrlKey && e.shiftKey) {
         e.preventDefault();
         $(".popup-trigger").click();
       } 
