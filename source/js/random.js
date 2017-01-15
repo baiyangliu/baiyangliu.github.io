@@ -16,7 +16,7 @@ _g = function() {
     var _len = parseInt(len / total);
     var last = len % total;
     for (var i = 0; i < total; i++) {
-        var _l = i == total ? _len : _len + last;
+        var _l = i == total ? _len + last : _len;
         if(_l!==0){
             work(_l);
         }
