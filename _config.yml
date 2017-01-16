@@ -28,15 +28,12 @@ category_dir: categories
 code_dir: downloads/code
 i18n_dir: :lang
 skip_render:
-  - baidu_verify_T32NvMLItY.html
-  - googleae92f2664080c6ec.html
-  - webscan_360_cn.html
 
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
 titlecase: false # Transform title into titlecase
-external_link: true # Open external links in new tab
+external_link: false # Open external links in new tab
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
@@ -73,6 +70,13 @@ robotstxt:
     - /categories.html
     - /tags.html
     - /about.html
+  disallow:
+    - /page/
+    - /js/
+    - /images/
+    - /imgs/
+    - /css/
+    - /lib/
   sitemap: /sitemap.xml
 
 # Extensions
