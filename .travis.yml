@@ -11,7 +11,7 @@ install:
   - npm install
 script:
   - hexo clean
-  - hexo algolia
+  #- hexo algolia
   - hexo g
   - gulp
 after_success:
