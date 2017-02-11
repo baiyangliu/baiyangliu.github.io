@@ -11,9 +11,9 @@ install:
   - npm install
 script:
   - hexo clean
-  #- hexo algolia
   - hexo g
   - gulp
+  - hexo algolia
 after_success:
   - echo $RSYNC_SECRET > rsync.secret
   - chmod 600 rsync.secret
