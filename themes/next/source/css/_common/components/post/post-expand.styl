@@ -10,8 +10,17 @@
   }
 
   .post-body {
-    pre, .highlight {
+    pre {
       padding: 10px;
+      .gutter pre {
+        padding-right: 10px;
+      }
+    }
+
+    .highlight {
+      margin-left: -40px;
+      margin-right: -40px;
+      padding: 0;
       .gutter pre {
         padding-right: 10px;
       }
@@ -49,7 +58,7 @@
     box-sizing: border-box;
     margin: auto;
     padding: 3px;
-    border: 0px solid $gray-lighter;
+    border: 1px solid $gray-lighter;
   }
 }
 
