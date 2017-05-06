@@ -14,7 +14,7 @@ script:
   - hexo g
   - gulp
   - hexo algolia
-after_success:
+after_success: 
   - echo $RSYNC_SECRET > rsync.secret
   - chmod 600 rsync.secret
   - rsync -vzrtopg --delete --progress --password-file=./rsync.secret ./public/* baiyangliu@baiyangliu.com::blog
