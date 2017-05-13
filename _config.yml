@@ -117,8 +117,8 @@ baidu_url_submit:
 search: true
 
 algolia:
-  applicationID: 'WA91NRM1DO'
-  apiKey: '92b7260bbd4b4731ecf53c75d246f8a9'
-  adminApiKey: '1ebf66637c4f2001203cac6102b74565'
+  applicationID: '8IYI0XR3E5'
+  apiKey: 'aa60ba3284d31eb23d09a7ab3d60bd80'
+  adminApiKey: '29bb95a182e7d75e0048461672796e38'
   indexName: 'baiyangliu'
   chunkSize: 5000
