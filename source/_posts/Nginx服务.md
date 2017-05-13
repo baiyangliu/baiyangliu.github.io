@@ -183,7 +183,7 @@ chkconfig nginx on
 ```
 启动服务
 ```
-service nginx on
+service nginx start
 ```
 
 /usr/lib/systemd/system/nginx.service
