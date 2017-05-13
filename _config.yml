@@ -114,19 +114,12 @@ baidu_url_submit:
   path: baidu_urls.txt
   
 
-search: true  
-  
+search: true
+
 algolia:
-  appId: "FPC1N6U0N2"
-  apiKey: "bb2b0e97ae994c1c08ee42cfaf207cd8"
-  adminApiKey: "ed741af6fea28042e7b15ec947f858ea"
+  applicationID: 'FPC1N6U0N2'
+  apiKey: 'bb2b0e97ae994c1c08ee42cfaf207cd8'
+  adminApiKey: 'ed741af6fea28042e7b15ec947f858ea'
+  indexName: 'baiyangliu'
   chunkSize: 5000
-  indexName: "baiyangliu"
-  fields:
-    - title
-    - tags
-    - slug
-    - excerpt
-    - excerpt:strip
-    - photos
-    - gallery
+ 
