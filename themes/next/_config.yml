@@ -205,7 +205,6 @@ links_title: 分站
 links_layout: block
 #links_layout: inline
 links:
-  主站: https://baiyangliu.com
   GitHub Pages: https://baiyangliu.github.io
   OSChina Pages: https://baiyangliu.oschina.io
   Coding Pages: https://baiyangliu.coding.me
