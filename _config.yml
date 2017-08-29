@@ -14,7 +14,7 @@ since: 2012
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://baiyangliu.com
+url: https://baiyangliu.github.io
 root: /
 permalink: :title.html
 permalink_defaults:
