@@ -8,8 +8,8 @@ before_script:
   - npm install -g hexo-cli
   - npm install -g gulp
   - npm install -g npm-check-updates
-  - npm-check-updates -u
 install:
+  - npm-check-updates -u
   - npm install
 script:
   - hexo clean
