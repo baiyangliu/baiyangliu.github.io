@@ -119,7 +119,6 @@ search: true
 algolia:
   applicationID: '8IYI0XR3E5'
   apiKey: 'bb2b0e97ae994c1c08ee42cfaf207cd8'
-  adminApiKey: 'ed741af6fea28042e7b15ec947f858ea'
   indexName: 'baiyangliu'
   chunkSize: 5000
  
