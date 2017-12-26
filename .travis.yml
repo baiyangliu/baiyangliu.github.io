@@ -12,6 +12,7 @@ before_script:
   - npm install -g hexo
   - npm install -g hexo-cli
   - npm install -g gulp
+  - export HEXO_ALGOLIA_INDEXING_KEY=aa60ba3284d31eb23d09a7ab3d60bd80
 script:
   - hexo clean
   - hexo algolia
