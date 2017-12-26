@@ -5,6 +5,7 @@ branches:
     - raw
 before_install:
   - npm install -g npm-check-updates
+  - npm-check-updates -u
 install:
   - npm install
 before_script:
@@ -17,7 +18,13 @@ script:
   - hexo g
   - gulp
 after_success: 
-   - cd ./public
+  - git init
+  - git config --global user.name "baiyangliu" 
+  - git config --global user.email "cun.liu@qq.com"
+  - git commit -m "Updated by travis-ci at $(date)"
+  - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git raw:raw
+
+  - cd ./public
   
   - echo 'callback0({qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"});' > me0.js
   - echo 'callback1({qq:407453324,wechat:"baiyangliu",email:"lc@baiyangliu.com"});' > me1.js
@@ -28,9 +35,6 @@ after_success:
   - echo "$TEST_SPEED_JS" > test_speed.js
   - echo "$STATIC_JSON" > static.json
   
-  - git init
-  - git config --global user.name "baiyangliu" 
-  - git config --global user.email "cun.liu@qq.com"
   - git add .
   - git commit -m "Updated by travis-ci at $(date)"
   - git push --force https://$DEPLOY_TOKEN@github.com/baiyangliu/baiyangliu.github.io.git master:master
