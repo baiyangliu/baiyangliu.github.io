@@ -3,14 +3,15 @@ node_js: node
 branches:
   only:
     - raw
+before_install:
+  - npm install -g npm-check-updates
+  - npm-check-updates -u
+install:
+  - npm install
 before_script:
   - npm install -g hexo
   - npm install -g hexo-cli
   - npm install -g gulp
-  - npm install -g npm-check-updates
-install:
-  - npm-check-updates -u
-  - npm install
 script:
   - hexo clean
   - hexo algolia
