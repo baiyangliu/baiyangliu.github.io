@@ -131,9 +131,9 @@ links_layout: inline
 #links_layout: inline
 links:
   #主站: https://baiyangliu.com
-  GitHub Pages: https://baiyangliu.github.io
-  OSChina Pages: https://baiyangliu.oschina.io
-  Coding Pages: https://baiyangliu.coding.me
+  GitHub: https://baiyangliu.github.io
+  OSChina: https://baiyangliu.oschina.io
+  Coding: https://baiyangliu.coding.me
   Heroku: https://baiyangliu.herokuapp.com
 
 # Sidebar Avatar
