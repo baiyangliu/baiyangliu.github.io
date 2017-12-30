@@ -128,13 +128,13 @@ social_icons:
 # Blog rolls
 links_icon: link
 links_title: 分站
-links_layout: inline
+links_layout: block
 #links_layout: inline
 links:
   #主站: https://baiyangliu.com
-  GitHub: https://baiyangliu.github.io
-  OSChina: https://baiyangliu.oschina.io
-  Coding: https://baiyangliu.coding.me
+  GitHub Pages: https://baiyangliu.github.io
+  OSChina Pages: https://baiyangliu.oschina.io
+  Coding Pages: https://baiyangliu.coding.me
   Heroku: https://baiyangliu.herokuapp.com
 
 # Sidebar Avatar
