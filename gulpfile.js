@@ -11,7 +11,7 @@ gulp.task('minify-css', function () {
 });
 
 gulp.task('minify-html', function () {
-    return gulp.src('./public/**/*.html').pipe(htmlclean()).pipe(gulp.dest('./public'))
+    return gulp.src('./public/**/*.html').pipe(htmlmin()).pipe(gulp.dest('./public'))
 });
 
 gulp.task('minify-js', function (cb) {
