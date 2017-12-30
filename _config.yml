@@ -77,7 +77,7 @@ robotstxt:
     - /imgs/
     - /css/
     - /lib/
-  sitemap: https://baiyangliu.com/sitemap.xml
+  sitemap: /sitemap.xml
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
