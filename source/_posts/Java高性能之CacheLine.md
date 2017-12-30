@@ -8,7 +8,7 @@ categories:
 date: 2017-3-28 14:27:19
 ---
 
-```
+```java
 public class TestL1CacheMiss {
     private static final int RUNS = 10;
     private static final int DIMENSION_1 = 1024 * 1024 * 8;
