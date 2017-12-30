@@ -114,8 +114,9 @@ scheme: Pisces
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
 social:
-  GitHub: https://github.com/baiyangliu
-  Weibo: http://weibo.com/317888378
+  GitHub: https://github.com/baiyangliu || github
+  Twitter: https://twitter.com/baiyangliu || twitter
+  StackOverflow: https://stackoverflow.com/baiyangliu || stack-overflow
   #LinkLabel: Link
 
 social_icons:
@@ -124,14 +125,15 @@ social_icons:
   transition: false
 
 # Blog rolls
+links_icon: link
 links_title: 分站
 links_layout: block
 #links_layout: inline
 links:
-  主站: https://baiyangliu.com
-  GitHub Pages: https://baiyangliu.github.io
-  OSChina Pages: https://baiyangliu.oschina.io
-  Coding Pages: https://baiyangliu.coding.me
+  #主站: https://baiyangliu.com
+  GitHub: https://baiyangliu.github.io
+  OSChina: https://baiyangliu.oschina.io
+  Coding: https://baiyangliu.coding.me
   Heroku: https://baiyangliu.herokuapp.com
 
 # Sidebar Avatar
