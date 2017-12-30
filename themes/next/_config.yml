@@ -36,7 +36,7 @@ footer:
   #since: 2015
 
   # Icon between year and copyright info.
-  icon: user
+  icon: heart
 
   # If not defined, will be used `author` from Hexo main config.
   copyright:
@@ -63,11 +63,11 @@ footer:
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: Subtitle
-index_with_subtitle: false
+index_with_subtitle: true
 
 
 # ---------------------------------------------------------------
@@ -124,11 +124,15 @@ social_icons:
   transition: false
 
 # Blog rolls
-#links_title: Links
-#links_layout: block
+links_title: 分站
+links_layout: block
 #links_layout: inline
-#links:
-  #Title: http://example.com/
+links:
+  主站: https://baiyangliu.com
+  GitHub Pages: https://baiyangliu.github.io
+  OSChina Pages: https://baiyangliu.oschina.io
+  Coding Pages: https://baiyangliu.coding.me
+  Heroku: https://baiyangliu.herokuapp.com
 
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
