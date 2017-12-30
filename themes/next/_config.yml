@@ -23,7 +23,7 @@ favicon:
   #ms_browserconfig: /images/browserconfig.xml
 
 # Set default keywords (Use a comma to separate)
-keywords: "Ğ¡Ğ¡°×Ñî, baiyangliu, °×Ñî"
+keywords: "å°å°ç™½æ¨, baiyangliu, ç™½æ¨"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -517,9 +517,9 @@ algolia_search:
   hits:
     per_page: 7
   labels:
-    input_placeholder: "ËÑË÷"
-    hits_empty: "Î´ÕÒµ½Óë¡±<font style='color:red;font-weight:bold;'>${query}</font>¡°ÅäÖÃµÄÒ³Ãæ"
-    hits_stats: "ÕÒµ½ <font style='color:green;font-weight:bold;'>${hits}</font> ÌõÊı¾İ£¬ÓÃÊ± <font style='color:green;font-weight:bold;'>${time}</font> ºÁÃë"
+    input_placeholder: "æœç´¢"
+    hits_empty: "æœªæ‰¾åˆ°ä¸â€<font style='color:red;font-weight:bold;'>${query}</font>â€œé…ç½®çš„é¡µé¢"
+    hits_stats: "æ‰¾åˆ° <font style='color:green;font-weight:bold;'>${hits}</font> æ¡æ•°æ®ï¼Œç”¨æ—¶ <font style='color:green;font-weight:bold;'>${time}</font> æ¯«ç§’"
 
 # Local search
 # Dependencies: https://github.com/flashlab/hexo-generator-search
