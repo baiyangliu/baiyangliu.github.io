@@ -6,7 +6,7 @@ tags:
 categories:
 - 科学上网
 ---
-前面介绍了如入用自签名证书，请参见[CentOS7 Strongswan IKEV2 架设梯子](http://0xa.in/aaaaa9)，这里介绍如何利用Let's Encrypt签发证书省去导入的麻烦。
+前面介绍了如入用自签名证书，请参见[CentOS7 Strongswan IKEV2 架设梯子](/CentOS7-Strongswan-IKEV2-架设梯子.html)，这里介绍如何利用Let's Encrypt签发证书省去导入的麻烦。
 <!--more-->
 关于证书签发，请参见[acme.sh](https://github.com/Neilpang/acme.sh)，由于本站的域名已转移至[Godaddy](https://godaddy.com/)，利用acme.sh可以实现全自动证书签发。
 
