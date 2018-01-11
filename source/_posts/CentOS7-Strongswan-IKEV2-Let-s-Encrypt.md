@@ -10,7 +10,7 @@ categories:
 <!--more-->
 关于证书签发，请参见[acme.sh](https://github.com/Neilpang/acme.sh)，由于本站的域名已转移至[Godaddy](https://godaddy.com/)，利用acme.sh可以实现全自动证书签发。
 
-签发完后，证书位于`/root/.acme.sh/0xa.in`目录下（请查看本站证书详情）。
+例如：为0xa.in域名签发证书，签发完后，证书位于`/root/.acme.sh/0xa.in`目录下。
 接下来，执行以下命令
 ```bash
 cd /etc/strongswan/ipsec.d/certs
