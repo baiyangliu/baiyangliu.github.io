@@ -20,7 +20,7 @@ script:
   - gulp
 after_success: 
   - cd ./public
-  - echo "$STATIC_JSON" > static.json
+  
   - git init
   - git config --global user.name "baiyangliu" 
   - git config --global user.email "cun.liu@qq.com"
