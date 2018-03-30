@@ -5,17 +5,19 @@ NC='\033[0m'
 sudo su
 yum install epel-release -y
 yum install socat strongswan -y
-curl https://get.acme.sh | sh
+curl -s https://get.acme.sh | sh
 
 
 read -p "Please input domain name: " domain
+
 read -p "Please input Godaddy API Key: " Key
+
 read -p "Please input Godaddy API Secret: " Secret
 
 export GD_Key="$Key"
 export GD_Secret="$Secret"
 
-./acme.sh -ecc --dnssleep 30 -k ec-384 --issue --dns dns_gd -d $domain -d "*.$domain"
+. /root/.acme.sh/acme.sh -ecc --dnssleep 30 -k ec-384 --issue --dns dns_gd -d $domain -d "*.$domain"
 
 echo copying files
 
