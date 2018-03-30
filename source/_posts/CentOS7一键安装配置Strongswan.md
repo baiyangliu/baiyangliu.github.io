@@ -32,20 +32,6 @@ export Ali_Secret="jlsdflanljkljlfdsaklkjflsa"
 
 Key和Secret从你第一步申请得到。
 
-3.设置域名
-```bash
-export domain=xxxx.com
-```
-
-4.设置用户名和密码
-```bash
-export username="<username>"
-export password="<password>"
-```
-
-请将<username>和<password>替换成你想要的用户名和密码
-
-
 ###### 一键安装
 
 ```bash

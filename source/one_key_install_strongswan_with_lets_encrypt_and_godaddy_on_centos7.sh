@@ -13,6 +13,8 @@ sudo yum install epel-release -q -y
 sudo yum install socat strongswan -q -y
 curl -s https://get.acme.sh | sh
 
+echo
+echo
 read -p "Please input domain: " domain
 read -p "Please input provider(Defaut:gd): " provider
 provider=${provider:-gd}
