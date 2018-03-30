@@ -1,4 +1,6 @@
 #!/usr/bin/env sh
+
+
 Green='\033[0;32m'
 NC='\033[0m'
 
@@ -7,26 +9,16 @@ yum install epel-release -y
 yum install socat strongswan -y
 curl -s https://get.acme.sh | sh
 
-
-read -p "Please input domain name: " domain
-
-read -p "Please input Godaddy API Key: " Key
-
-read -p "Please input Godaddy API Secret: " Secret
-
-export GD_Key="$Key"
-export GD_Secret="$Secret"
-
-. /root/.acme.sh/acme.sh -ecc --dnssleep 30 -k ec-384 --issue --dns dns_gd -d $domain -d "*.$domain"
+. /root/.acme.sh/acme.sh --ecc --dnssleep 30 -k ec-384 --issue --dns dns_${provider} -d ${domain} -d "*.${domain}"
 
 echo copying files
 
 cd /etc/strongswan/ipsec.d/certs
-ln -s /root/.acme.sh/$domain_ecc/fullchain.cer fullchain.cer
+ln -s /root/.acme.sh/${domain}_ecc/fullchain.cer fullchain.cer
 cd /etc/strongswan/ipsec.d/private
-ln -s /root/.acme.sh/$domain_ecc/$domain.key $domain.key
+ln -s /root/.acme.sh/${domain}_ecc/${domain}.key ${domain}.key
 cd /etc/strongswan/ipsec.d/cacerts
-ln -s /root/.acme.sh/$domain_ecc/ca.cer ca.cer
+ln -s /root/.acme.sh/${domain}_ecc/ca.cer ca.cer
 
 cat > /etc/strongswan/ipsec.d/cacerts/dst_root_ca_x3.cer <<EOF
 -----BEGIN CERTIFICATE-----
@@ -55,17 +47,13 @@ echo configuring /etc/strongswan/ipsec.conf
 
 cat > /etc/strongswan/ipsec.conf <<EOF
 #/etc/strongswan/ipsec.conf
-
 config setup
     uniqueids=never
-
-
 conn %default
     keyexchange=ike
     left=%any
     leftsubnet=0.0.0.0/0
     right=%any
-
 conn IKE-BASE
     ikelifetime=60m
     keylife=20m
@@ -73,7 +61,6 @@ conn IKE-BASE
     keyingtries=1
     leftcert=fullchain.cer
     rightsourceip=10.0.18.0/24
-
 	
 conn ike2-eap
     also=IKE-BASE
@@ -81,7 +68,7 @@ conn ike2-eap
     ike=aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048,aes256-sha1-modp1024!
     esp=aes256-sha256,3des-sha1,aes256-sha1!
     leftsendcert=always
-    leftid=vpn.$domain
+    leftid=vpn.${domain}
     leftauth=pubkey
     leftfirewall=yes
     rightauth=eap-mschapv2
@@ -91,8 +78,6 @@ conn ike2-eap
     dpdaction=clear
     fragmentation=yes
     auto=add
-
-
 conn IPSec-IKEv1-PSK
     also=IKE-BASE
     keyexchange=ikev1
@@ -101,8 +86,6 @@ conn IPSec-IKEv1-PSK
     rightauth=psk
     rightauth2=xauth
     auto=add
-
-
 conn IPSec-xauth
     also=IKE-BASE
     leftauth=psk
@@ -117,7 +100,6 @@ echo configuring /etc/strongswan/strongswan.conf
 
 echo > /etc/strongswan/strongswan.conf <<EOF
 #/etc/strongswan/strongswan.conf
-
 charon {
     load_modular = yes
     duplicheck.enable = no
@@ -131,21 +113,23 @@ charon {
     nbns1 = 8.8.8.8
     nbns2 = 8.8.4.4
 }
-
 include strongswan.d/*.conf
 EOF
 
+echo
+echo
 printf "${Green}OK,We are almost succeeded.${NC}\n"
 printf "${Green}Let's create a user account right now.${NC}\n"
+echo
+echo
 
 read -p "Please input username: " username
+
 read -p "Please input password: " password
 
 echo > /etc/strongswan/ipsec.secrets <<EOF
 #/etc/strongswan/ipsec.secrets
-
-: RSA $domain.key
-
+: RSA ${domain}.key
 ${username} : EAP "${password}"
 EOF
 
@@ -172,3 +156,5 @@ systemctl enable strongswan
 strongswan restart
 
 printf "${Green}Seccedd.${NC}\n"
+echo
+
