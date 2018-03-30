@@ -11,15 +11,17 @@ echo
 
 sudo yum install epel-release -q -y
 sudo yum install socat strongswan -q -y
+sudo chkconfig strongswan on
 curl -s https://get.acme.sh | sh
 
 echo
 echo
 read -p "Please input domain: " domain
+
 read -p "Please input provider(Defaut:gd): " provider
 provider=${provider:-gd}
 
-sh ~/.acme.sh/acme.sh --ecc --dnssleep 30 -k ec-384 --issue --dns dns_${provider} -d ${domain} -d "*.${domain}"
+sh ~/.acme.sh/acme.sh --dnssleep 30 -k 4096 --issue --dns dns_${provider} -d ${domain} -d "*.${domain}"
 
 echo
 echo Copying files
@@ -27,11 +29,11 @@ echo
 
 cat > /tmp/t <<EOF
 cd /etc/strongswan/ipsec.d/certs
-ln -f -s `pwd`/.acme.sh/${domain}_ecc/fullchain.cer fullchain.cer
+ln -f -s `pwd`/.acme.sh/${domain}/fullchain.cer fullchain.cer
 cd /etc/strongswan/ipsec.d/private
-ln -f -s `pwd`/.acme.sh/${domain}_ecc/${domain}.key ${domain}.key
+ln -f -s `pwd`/.acme.sh/${domain}/${domain}.key ${domain}.key
 cd /etc/strongswan/ipsec.d/cacerts
-ln -f -s `pwd`/.acme.sh/${domain}_ecc/ca.cer ca.cer
+ln -f -s `pwd`/.acme.sh/${domain}/ca.cer ca.cer
 EOF
 
 chmod +x /tmp/t
