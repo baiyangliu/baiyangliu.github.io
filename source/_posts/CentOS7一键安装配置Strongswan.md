@@ -35,6 +35,9 @@ Key和Secret从你第一步申请得到。
 ###### 一键安装
 
 ```bash
-curl -s https://baiyangliu.github.io/one_key_install_strongswan_with_lets_encrypt_and_godaddy_on_centos7.sh | sh
+curl -s https://baiyangliu.github.io/one_key_install_strongswan_with_lets_encrypt_and_godaddy_on_centos7.sh > a
+chmod +x a
+./a
+rm -rf a
 ```
 

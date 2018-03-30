@@ -26,11 +26,11 @@ echo Copying files
 echo
 
 sudo cd /etc/strongswan/ipsec.d/certs
-sudo ln -f -s /root/.acme.sh/${domain}_ecc/fullchain.cer fullchain.cer
+sudo ln -f -s ~/.acme.sh/${domain}_ecc/fullchain.cer fullchain.cer
 sudo cd /etc/strongswan/ipsec.d/private
-sudo ln -f -s /root/.acme.sh/${domain}_ecc/${domain}.key ${domain}.key
+sudo ln -f -s ~/.acme.sh/${domain}_ecc/${domain}.key ${domain}.key
 sudo cd /etc/strongswan/ipsec.d/cacerts
-sudo ln -f -s /root/.acme.sh/${domain}_ecc/ca.cer ca.cer
+sudo ln -f -s ~/.acme.sh/${domain}_ecc/ca.cer ca.cer
 
 sudo bash -c 'cat > /etc/strongswan/ipsec.d/cacerts/dst_root_ca_x3.cer' <<EOF
 -----BEGIN CERTIFICATE-----
