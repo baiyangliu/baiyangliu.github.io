@@ -77,8 +77,8 @@ conn IKE-BASE
 conn ike2-eap
     also=IKE-BASE
     keyexchange=ikev2
-    ike=aes128-sha256-ecp256,aes256-sha384-ecp384,aes128-sha256-modp2048,aes128-sha1-modp2048,aes256-sha384-modp4096,aes256-sha256-modp4096,aes256-sha1-modp4096,aes128-sha256-modp1536,aes128-sha1-modp1536,aes256-sha384-modp2048,aes256-sha256-modp2048,aes256-sha1-modp2048,aes128-sha256-modp1024,aes128-sha1-modp1024,aes256-sha384-modp1536,aes256-sha256-modp1536,aes256-sha1-modp1536,aes256-sha384-modp1024,aes256-sha256-modp1024,aes256-sha1-modp1024!
-    esp=aes128gcm16-ecp256,aes256gcm16-ecp384,aes128-sha256-ecp256,aes256-sha384-ecp384,aes128-sha256-modp2048,aes128-sha1-modp2048,aes256-sha384-modp4096,aes256-sha256-modp4096,aes256-sha1-modp4096,aes128-sha256-modp1536,aes128-sha1-modp1536,aes256-sha384-modp2048,aes256-sha256-modp2048,aes256-sha1-modp2048,aes128-sha256-modp1024,aes128-sha1-modp1024,aes256-sha384-modp1536,aes256-sha256-modp1536,aes256-sha1-modp1536,aes256-sha384-modp1024,aes256-sha256-modp1024,aes256-sha1-modp1024,aes128gcm16,aes256gcm16,aes128-sha256,aes128-sha1,aes256-sha384,aes256-sha256,aes256-sha1!
+    ike=aes256-sha256-modp2048,3des-sha1-modp2048,aes256-sha1-modp2048,aes256-sha1-modp1024!
+    esp=aes256-sha256,3des-sha1,aes256-sha1!
     leftsendcert=always
     leftid=vpn.0xa.in
     leftauth=pubkey
@@ -155,15 +155,13 @@ net.ipv4.conf.all.send_redirects = 0
 ```
 ###### 配置防火墙
 ``` bash
-firewall-cmd --zone=dmz --permanent --add-rich-rule='rule protocol value="esp" accept' # ESP (the encrypted data packets)
-firewall-cmd --zone=dmz --permanent --add-rich-rule='rule protocol value="ah" accept' # AH (authenticated headers)
-firewall-cmd --zone=dmz --permanent --add-port=500/udp #IKE  (security associations)
-firewall-cmd --zone=dmz --permanent --add-port=4500/udp # IKE NAT Traversal (IPsec between natted devices)
+firewall-cmd --permanent --add-rich-rule='rule protocol value="esp" accept'
+firewall-cmd --permanent --add-rich-rule='rule protocol value="ah" accept'
 firewall-cmd --permanent --add-service="ipsec"
-firewall-cmd --zone=dmz --permanent --add-masquerade
-firewall-cmd --set-default-zone=dmz
+firewall-cmd --permanent --add-port=500/udp
+firewall-cmd --permanent --add-port=4500/udp
+firewall-cmd --permanent --add-masquerade
 firewall-cmd --reload
-firewall-cmd --list-all
 ```
 ###### 启动
 ``` bash
