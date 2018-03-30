@@ -1,4 +1,4 @@
-title: CentOS7一件安装配置Strongswan
+title: CentOS7一键安装配置Strongswan
 author: baiyangliu
 date: 2015-12-15 15:37:08
 tags:
