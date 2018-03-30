@@ -25,6 +25,7 @@ ln -s /root/.acme.sh/$domain_ecc/$domain.key $domain.key
 cd /etc/strongswan/ipsec.d/cacerts
 ln -s /root/.acme.sh/$domain_ecc/ca.cer ca.cer
 
+echo importing dst_root_ca_x3.cer
 cat > /etc/strongswan/ipsec.d/cacerts/dst_root_ca_x3.cer <<EOF
 -----BEGIN CERTIFICATE-----
 MIIDSjCCAjKgAwIBAgIQRK+wgNajJ7qJMDmGLvhAazANBgkqhkiG9w0BAQUFADA/
