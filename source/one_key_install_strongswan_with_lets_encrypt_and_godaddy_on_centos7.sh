@@ -16,8 +16,7 @@ export GD_Secret="$Secret"
 
 ./acme.sh -ecc --dnssleep 30 -k ec-384 --issue --dns dns_gd -d $domain -d "*.$domain"
 
-
-
+echo copying files
 
 cd /etc/strongswan/ipsec.d/certs
 ln -s /root/.acme.sh/$domain_ecc/fullchain.cer fullchain.cer
@@ -25,6 +24,8 @@ cd /etc/strongswan/ipsec.d/private
 ln -s /root/.acme.sh/$domain_ecc/$domain.key $domain.key
 cd /etc/strongswan/ipsec.d/cacerts
 ln -s /root/.acme.sh/$domain_ecc/ca.cer ca.cer
+
+echo configuring /etc/strongswan/ipsec.conf
 
 cat > /etc/strongswan/ipsec.conf <<EOF
 #/etc/strongswan/ipsec.conf
@@ -86,6 +87,7 @@ conn IPSec-xauth
     auto=add
 EOF
 
+echo configuring /etc/strongswan/strongswan.conf
 
 echo > /etc/strongswan/strongswan.conf <<EOF
 #/etc/strongswan/strongswan.conf
@@ -122,6 +124,8 @@ ${username} : EAP "${password}"
 EOF
 
 
+echo configuring firewall
+
 firewall-cmd --permanent --add-rich-rule='rule protocol value="esp" accept'
 firewall-cmd --permanent --add-rich-rule='rule protocol value="ah" accept'
 firewall-cmd --permanent --add-service="ipsec"
@@ -130,6 +134,7 @@ firewall-cmd --permanent --add-port=4500/udp
 firewall-cmd --permanent --add-masquerade
 firewall-cmd --reload
 
+echo configuring ip forward
 
 sysctl -w net.ipv4.ip_forward = 1
 sysctl -w net.ipv4.conf.all.accept_redirects = 0
@@ -139,3 +144,5 @@ sysctl -w net.ipv4.conf.all.send_redirects = 0
 sysctl -p
 systemctl enable strongswan
 strongswan restart
+
+printf "${Green}Seccedd.${NC}\n"
