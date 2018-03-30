@@ -4,23 +4,33 @@
 Green='\033[0;32m'
 NC='\033[0m'
 
-sudo su
-yum install epel-release -y
-yum install socat strongswan -y
+cd ~
+
+echo Installing files
+echo
+
+sudo yum install epel-release -q -y
+sudo yum install socat strongswan -q -y
 curl -s https://get.acme.sh | sh
 
-. /root/.acme.sh/acme.sh --ecc --dnssleep 30 -k ec-384 --issue --dns dns_${provider} -d ${domain} -d "*.${domain}"
+read -p "Please input domain: " domain
+read -p "Please input provider(Defaut:gd): " provider
+provider=${provider:-gd}
 
-echo copying files
+sh ~/.acme.sh/acme.sh --ecc --dnssleep 30 -k ec-384 --issue --dns dns_${provider} -d ${domain} -d "*.${domain}"
 
-cd /etc/strongswan/ipsec.d/certs
-ln -s /root/.acme.sh/${domain}_ecc/fullchain.cer fullchain.cer
-cd /etc/strongswan/ipsec.d/private
-ln -s /root/.acme.sh/${domain}_ecc/${domain}.key ${domain}.key
-cd /etc/strongswan/ipsec.d/cacerts
-ln -s /root/.acme.sh/${domain}_ecc/ca.cer ca.cer
+echo
+echo Copying files
+echo
 
-cat > /etc/strongswan/ipsec.d/cacerts/dst_root_ca_x3.cer <<EOF
+sudo cd /etc/strongswan/ipsec.d/certs
+sudo ln -f -s /root/.acme.sh/${domain}_ecc/fullchain.cer fullchain.cer
+sudo cd /etc/strongswan/ipsec.d/private
+sudo ln -f -s /root/.acme.sh/${domain}_ecc/${domain}.key ${domain}.key
+sudo cd /etc/strongswan/ipsec.d/cacerts
+sudo ln -f -s /root/.acme.sh/${domain}_ecc/ca.cer ca.cer
+
+sudo bash -c 'cat > /etc/strongswan/ipsec.d/cacerts/dst_root_ca_x3.cer' <<EOF
 -----BEGIN CERTIFICATE-----
 MIIDSjCCAjKgAwIBAgIQRK+wgNajJ7qJMDmGLvhAazANBgkqhkiG9w0BAQUFADA/
 MSQwIgYDVQQKExtEaWdpdGFsIFNpZ25hdHVyZSBUcnVzdCBDby4xFzAVBgNVBAMT
@@ -43,9 +53,9 @@ Ob8VZRzI9neWagqNdwvYkQsEjgfbKbYK7p2CNTUQ
 -----END CERTIFICATE-----
 EOF
 
-echo configuring /etc/strongswan/ipsec.conf
+echo Configuring /etc/strongswan/ipsec.conf
 
-cat > /etc/strongswan/ipsec.conf <<EOF
+sudo bash -c 'cat > /etc/strongswan/ipsec.conf' <<EOF
 #/etc/strongswan/ipsec.conf
 config setup
     uniqueids=never
@@ -96,9 +106,9 @@ conn IPSec-xauth
     auto=add
 EOF
 
-echo configuring /etc/strongswan/strongswan.conf
+echo Configuring /etc/strongswan/strongswan.conf
 
-echo > /etc/strongswan/strongswan.conf <<EOF
+sudo bash -c 'cat > /etc/strongswan/strongswan.conf' <<EOF
 #/etc/strongswan/strongswan.conf
 charon {
     load_modular = yes
@@ -127,34 +137,38 @@ read -p "Please input username: " username
 
 read -p "Please input password: " password
 
-echo > /etc/strongswan/ipsec.secrets <<EOF
+sudo bash -c 'cat > /etc/strongswan/ipsec.secrets' <<EOF
 #/etc/strongswan/ipsec.secrets
 : RSA ${domain}.key
 ${username} : EAP "${password}"
 EOF
 
 
-echo configuring firewall
+echo Configuring firewall
 
-firewall-cmd --permanent --add-rich-rule='rule protocol value="esp" accept'
-firewall-cmd --permanent --add-rich-rule='rule protocol value="ah" accept'
-firewall-cmd --permanent --add-service="ipsec"
-firewall-cmd --permanent --add-port=500/udp
-firewall-cmd --permanent --add-port=4500/udp
-firewall-cmd --permanent --add-masquerade
-firewall-cmd --reload
+sudo firewall-cmd --permanent --add-rich-rule='rule protocol value="esp" accept'
+sudo firewall-cmd --permanent --add-rich-rule='rule protocol value="ah" accept'
+sudo firewall-cmd --permanent --add-service="ipsec"
+sudo firewall-cmd --permanent --add-port=500/udp
+sudo firewall-cmd --permanent --add-port=4500/udp
+sudo firewall-cmd --permanent --add-masquerade
+sudo firewall-cmd --reload
 
-echo configuring ip forward
+echo
+echo Configuring ip forward
+echo
 
-sysctl -w net.ipv4.ip_forward=1
-sysctl -w net.ipv4.conf.all.accept_redirects=0
-sysctl -w net.ipv4.conf.all.send_redirects=0
+sudo sysctl -w net.ipv4.ip_forward=1
+sudo sysctl -w net.ipv4.conf.all.accept_redirects=0
+sudo sysctl -w net.ipv4.conf.all.send_redirects=0
 
 
-sysctl -p
-systemctl enable strongswan
-strongswan restart
+sudo sysctl -p
+sudo systemctl enable strongswan
+sudo strongswan restart
 
+echo
+echo
 printf "${Green}Seccedd.${NC}\n"
 echo
 
