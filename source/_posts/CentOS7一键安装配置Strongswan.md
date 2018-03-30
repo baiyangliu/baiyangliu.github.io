@@ -171,10 +171,6 @@ printf "${Green}Let's create a user account right now.${NC}\n"
 echo
 echo
 
-read -p "Please input username: " username
-
-read -p "Please input password: " password
-
 echo > /etc/strongswan/ipsec.secrets <<EOF
 #/etc/strongswan/ipsec.secrets
 : RSA ${domain}.key
