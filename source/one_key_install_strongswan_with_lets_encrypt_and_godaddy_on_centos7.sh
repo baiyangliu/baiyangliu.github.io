@@ -3,7 +3,8 @@ Green='\033[0;32m'
 NC='\033[0m'
 
 sudo su
-yum install socat -y
+yum install epel-release -y
+yum install socat strongswan -y
 curl https://get.acme.sh | sh
 
 
