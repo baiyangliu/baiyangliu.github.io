@@ -16,9 +16,7 @@ curl -s https://get.acme.sh | sh
 
 echo
 echo
-read -p "Please input domain: " domain
 
-read -p "Please input provider(Defaut:gd): " provider
 provider=${provider:-gd}
 
 sh ~/.acme.sh/acme.sh --dnssleep 30 -k 4096 --issue --dns dns_${provider} -d ${domain} -d "*.${domain}"
@@ -27,18 +25,14 @@ echo
 echo Copying files
 echo
 
-cat > /tmp/t <<EOF
 cd /etc/strongswan/ipsec.d/certs
 ln -f -s `pwd`/.acme.sh/${domain}/fullchain.cer fullchain.cer
 cd /etc/strongswan/ipsec.d/private
 ln -f -s `pwd`/.acme.sh/${domain}/${domain}.key ${domain}.key
 cd /etc/strongswan/ipsec.d/cacerts
 ln -f -s `pwd`/.acme.sh/${domain}/ca.cer ca.cer
-EOF
 
-chmod +x /tmp/t
-sudo /tmp/t
-rm -rf /tmp/t
+cd ~
 
 sudo bash -c 'cat > /etc/strongswan/ipsec.d/cacerts/dst_root_ca_x3.cer' <<EOF
 -----BEGIN CERTIFICATE-----
@@ -175,7 +169,7 @@ sudo sysctl -w net.ipv4.conf.all.send_redirects=0
 
 sudo sysctl -p
 sudo systemctl enable strongswan
-sudo strongswan restart
+sudo service strongswan restart
 
 echo
 echo
