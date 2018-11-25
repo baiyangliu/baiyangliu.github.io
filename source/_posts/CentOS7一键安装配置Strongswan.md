@@ -47,3 +47,5 @@ chmod +x a
 rm -rf a
 ```
 
+
+密码文件：```/etc/strongswan/ipsec.secrets```
