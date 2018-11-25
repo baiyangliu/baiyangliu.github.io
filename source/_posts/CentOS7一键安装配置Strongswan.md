@@ -32,6 +32,12 @@ export Ali_Secret="jlsdflanljkljlfdsaklkjflsa"
 
 Key和Secret从你第一步申请得到。
 
+指定域名
+```bash
+#请换成你自己的域名
+export domain=domain.com
+```
+
 ###### 一键安装
 
 ```bash
